@@ -1,0 +1,53 @@
+\documentclass[tikz, border=1pt]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{decorations.markings}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\begin{document}
+\definecolor{color0}{HTML}{e2431e}
+\definecolor{color1}{HTML}{e7711b}
+\definecolor{color2}{HTML}{f1ca3a}
+\definecolor{color3}{HTML}{6f9654}
+\definecolor{color4}{HTML}{1c91c0}
+\definecolor{color5}{HTML}{43459d}
+	\begin{tikzpicture}[
+			    lin/.style={
+				line width=0.8pt, mark=none,black
+			},
+			fst/.style={
+				lin,black,
+				opacity=1
+			},	]
+		    \begin{axis}[
+			scale=1.2,
+			axis lines=middle,
+			xlabel={$u_\text{б}$},
+			ylabel={$n\cdot i_k-i_\text{б}$,  $i'_k$},
+		    major grid style={line width=.5pt,draw=black!90},
+		    xtick distance=1,
+		    ytick distance=1,
+			xtick={0,1,2}, 
+			ytick={0,0.5,1,1.5}, 
+		    ymax = 2,
+		    xmax = 2.7,
+		    xmin = 0,
+			extra x ticks={-1.2},
+			},
+			extra x tick labels={
+			    {u=I}
+			},
+		]
+		\addplot +[
+		  	fst,
+   			yshift=-1pt,		 
+			] plot table[x=x,y=y] {../data/img_8c.tsv};
+		\addplot+[samples=200, fst,domain=0:2.5,] {0.9334*(x-0.5)} node[pos=1, right] {$i'_k$};
+		    \end{axis}
+		\end{tikzpicture}	
+\end{document}

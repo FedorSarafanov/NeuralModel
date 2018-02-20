@@ -1,0 +1,21 @@
+\input{img.tex}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+		scale=1.2,
+		axis lines=middle,
+		xlabel={$u_\text{б}$},
+		ylabel={$n\cdot i_k-i_\text{б}$,  $i'_k$},
+		xtick={0,1,2},
+		ytick={0,0.5,1,1.5},
+		xmin = 0,
+		xmax = 2.7,
+		ymax = 2,
+	]
+
+	\addplot+[lin,yshift=-1pt] plot table[x=x,y=y] {../data/img_8c.tsv};
+	\addplot+[samples=200, lin,domain=0:2.5,] {0.9334*(x-0.5)} node[pos=1, right] {$i'_k$};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

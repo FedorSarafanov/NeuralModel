@@ -1,153 +1,118 @@
 \documentclass[border=0pt]{standalone}
 \usepackage[europeanresistors,americaninductors]{circuitikz}
-\tikzset{
-  pics/carc/.style args={#1:#2:#3}{
-    code={
-      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
-    }
-  }
-}
+
 
 \begin{document}
-    % \ctikzset{bipoles/resistor/height=0.1}
-    % \tikzset{Rs/.style={/tikz/circuitikz/bipoles/length=20pt}}      
-    \tikzset{Rs/.style={}}      
-    \ctikzset{bipoles/length=0.8cm}
-	% \ctikzset{capacitors/width=1cm}
-    \begin{circuitikz}[]
+\tikzset{Rs/.style={}}
+\ctikzset{bipoles/length=0.8cm}
+\begin{circuitikz}[]
+	\tikzstyle{every node}=[font=\footnotesize, text=black]
+	\begin{scope}[color=black!90]
+		\coordinate (0) at (0,0);
+		\draw (0,0) to[pR,Rs, *-, n=POT, l_=$R_2$] (0,1.5);
+		\draw (0) - ++(0,-0.25) node [rground, rotate=0] {};
+		\draw (0,1.5)
+		++(1.5,0.25) coordinate (T1coord) node[njfet, scale=0.7] (T1) {} node[right, xshift=0.5em,yshift=0em] {$T_1$};
+		\draw (T1coord) ++(-0.15,0) circle(0.35);
 
+		\draw (0,1.5) |- coordinate (t) (T1.G);
+		\draw (t) to [short,*-] (t);
+		\draw (0,1.5)
+		to[R,Rs,l_=$R_1$] ++(0,1.5)
+		to[short,-*] ++(0,0)
+		to ++(0,0.25)
+		to[L, l_=$L_2$, mirror] ++ (0,1.25) |- ++(-0.25,0.25) node [rground, rotate=-90] {};
+		\draw (-0.5,0) |- (POT.wiper);
+		\draw (-0.5,0)
+		to (0)
+		to (1.5,0)
+		to[R,Rs,l_=$R_3$] ++(0,1.5);
 
+		\draw (T1.D)
+		to[short,-*] (1.5,3) coordinate (c);
+		\draw (c)
+		-| ++(-0.5,0.25)
+		to[L,l_=$L_1$] ++ (0,1.25) |- ++(0.5,0.25);
+		\draw (c)
+		-| ++(0.5,0.25)
+		to[C,l_=$C_1$] ++ (0,1.25) |- ++(-0.5,0.25) coordinate (c2);
+		\draw (1.5,1.5) to[short,*-] ++(1.5,0) to[C,l^=$C_2$] ++(0,-1.5);
+		\draw (1.5,0) to[short,*-] (3,0);
+	\end{scope}
+	\begin{scope}[color=red]
+		\draw (c2)++(0,0.75) node[pnp,scale=-1](T2){} node[right, yshift=1.2em, xshift=0.5em] {$T_2$};
+		\draw (c2)++(0,0.75) ++(0.11,0) circle(0.35);
+		\draw (c2) to [short,*-] (T2.E);
+		\draw (T2.C) to (1.5,7) coordinate (tt);
 
-    % \xdef\darkness{0}
-    % \xdef\op{0.1}
+		\draw (tt) to ++(2,0)
+		to[R,Rs,*-*,l^=$R_4$] ++(0,-1.5) coordinate (bb)
+		to (T2.B);
 
-    % \xdef\xSIZE{12}
-    % \xdef\ySIZE{7}
+		\draw (bb) to[pR,Rs, *-*, n=R5, mirror, l^=$R_5$]  ++(0,-1.5) coordinate (R5bot) - ++(0,-0.25) node [rground, rotate=0] {};
+		\draw (R5bot) -| ++(-0.5,0.75) to (R5.wiper);
+		\draw (3.5,5.5) to [C, *-] ++(1.5,0) node[above, xshift=-1em,yshift=0.5em] {$C_5$}  -- ++ (1,0);
+		\draw (3.5,7) to ++(1.5,0);
 
-    % \draw[step=1.0,blue,thick,opacity=\op] (0,0) grid (\xSIZE,\ySIZE);
-    % \draw[step=0.5,blue,very thin,opacity=\op] (0,0) grid (\xSIZE,\ySIZE);
+	\end{scope}
+	\begin{scope}[color=blue]
+		\draw (5,2) node[pnp,yscale=-1,rotate=0](T3){} node[right, yshift=1.2em, xshift=0.5em] {$T_3$};
+		\draw (5,2) ++(-0.11,0) circle(0.35);
+		\draw (1.5,2.5) to[short,*-] ++(0.5,0) to [C, -*, l^=$C_3$] ++ (1.5,0) coordinate (qq) to ++(-0,-0.5) to (T3.B);
+		\draw (qq) to[R,Rs,-*,l^=$R_6$] ++(1.5,0);
+		\draw (5,1.5) to[R,Rs,*-*,l^=$R_7$] (5,0);
+		\draw (5,1.5) to[short,*-] ++(1,0);
+		\draw (5,7) to[short,*-]  (T3.C);
+		\draw (3,0) to[short,*-*]  (5,0);
+	\end{scope}
+	\begin{scope}[color=violet]
+		\draw (6.5,0) to[R,Rs,*-,l_=$R_4$] ++(0,1.5);
+		\draw (7.5,0) to[C,*-,] node[right, yshift=-0.5cm] {$C_6$} ++(0,1.5);
+		\draw (6.5,1.5) -- ++(0.5,0) to[short,*-] ++(0.5,0);
 
-    % \foreach \i in {0,1,...,\ySIZE} {
-    %   \draw[opacity=\op] (0,\i) node [left] {\i};
-    % }
-    % \foreach \i in {0,1,...,\xSIZE} {
-    %   % \draw[opacity=\op] (0,\i) node [left] {\i};
-    %   \draw[opacity=\op] (\i,0) node [below] {\i};
-    % }    
+		\draw (8.5,0) to[R,Rs,*-] node[right, yshift=-0.5cm,xshift=2pt] {$R_{11}$} ++(0,1.5);
+		\draw (10,0) to[vC,
+			*-,] node[left, yshift=-0.4cm] {$C_7$} ++(0,1.5) to ++(-1,0);
 
+		\draw (8.5,2.5) node[npn](T4){} node[
+			right, yshift=0em, xshift=0.6em] {$T_4$}  ++(-0.11,0) circle(0.35);
 
+		\draw (8.5,1.5) to ++(0.5,0);
+		\draw (8.5,1.5) to (T4.E);
 
-    \tikzstyle{every node}=[font=\footnotesize, text=black]
-        \begin{scope}[color=green!30!black!80]
-            \coordinate (0) at (0,0);
-            \draw (0,0) to[pR,Rs, *-, n=POT, l_=$R_2$] (0,1.5);
-            \draw (0) - ++(0,-0.25) node [rground, rotate=0] {};
-            \draw (0,1.5)
-                ++(1.5,0.25) coordinate (T1coord) node[njfet, scale=0.7] (T1) {} node[right, xshift=0.5em,yshift=0em] {$T_1$};
-            \draw (T1coord) ++(-0.15,0) circle(0.35);
+		\draw (T4.C) -- (8.5,3) to[short,-*] ++ (0.5,0) -- ++(0.5,0) coordinate (c);
 
-            \draw (0,1.5) |- coordinate (t) (T1.G);
-            \draw (t) to [short,*-] (t);
-            \draw (0,1.5) 
-                to[R,Rs,l_=$R_1$] ++(0,1.5)
-                to[short,-*] ++(0,0)
-                to ++(0,0.25)
-                to[L, l_=$L_2$, mirror] ++ (0,1.25) |- ++(-0.25,0.25) node [rground, rotate=-90] {};
-            \draw (-0.5,0) |- (POT.wiper);
-            \draw (-0.5,0) 
-                to (0)
-                to (1.5,0) 
-                to[R,Rs,l_=$R_3$] ++(0,1.5);
+		\draw (c)
+		-| ++(-0.5,0.75)
+		++(0,2)
+		|- ++(0.5,0.75) to[short, *-] ++(0,0) to ++ (0,0.5) to[short,-*] (7,7);
 
-            \draw (T1.D) 
-                to[short,-*] (1.5,3) coordinate (c);   
-            \draw (c)
-                -| ++(-0.5,0.25)                 
-                to[L,l_=$L_1$] ++ (0,1.25) |- ++(0.5,0.25);
-            \draw (c)
-                -| ++(0.5,0.25)                 
-                to[C,l_=$C_1$] ++ (0,1.25) |- ++(-0.5,0.25) coordinate (c2);
-            \draw (1.5,1.5) to[short,*-] ++(1.5,0) to[C,l^=$C_2$] ++(0,-1.5);             
-            \draw (1.5,0) to[short,*-] (3,0);               
-        \end{scope}
-        \begin{scope}[color=red]
-            \draw (c2)++(0,0.75) node[pnp,scale=-1](T2){} node[right, yshift=1.2em, xshift=0.5em] {$T_2$};
-            \draw (c2)++(0,0.75) ++(0.11,0) circle(0.35);
-            \draw (c2) to [short,*-] (T2.E);
-            \draw (T2.C) to (1.5,7) coordinate (tt);
+		\begin{scope}[xshift=9cm, yshift=4.25cm-0.5cm]
+			\draw (0,0) to[L] (0,0.65);
+			\draw (0,0.675) node[right, yshift=0.337cm] {$L_3$} to[L]  (0,0.675+0.65) ;
+			\draw (0,0.675+0.65) to[L] (0,0.675*2+0.65);
+		\end{scope}
+		\draw (T4.B) to (8,2.5) to (8,3) to [L,l_=$L_4$, mirror] ++ (0,1)
+		to [short, -*] ++(-1,0) to (7,1.5);
+		\draw (8,5) to [L,l_=$L_5$, mirror] ++ (0,1.5) to[short,-*] ++ (-0.5,0) to ++ (-1.5,0) to ++(0,-1);
 
-            \draw (tt) to ++(2,0)
-                to[R,Rs,*-*,l^=$R_4$] ++(0,-1.5) coordinate (bb)
-                to (T2.B);
+		\draw (8,5) to[short, *-] ++(-0.5,0) to[R] node[right, yshift=-0.3cm,xshift=-1pt, scale=0.8] {$R_{10}$} ++(0,1.5);
 
-            \draw (bb) to[pR,Rs, *-*, n=R5, mirror, l^=$R_5$]  ++(0,-1.5) coordinate (R5bot) - ++(0,-0.25) node [rground, rotate=0] {};
-            \draw (R5bot) -| ++(-0.5,0.75) to (R5.wiper);
-            \draw (3.5,5.5) to [C, *-] ++(1.5,0) node[above, xshift=-1em,yshift=0.5em] {$C_5$}  -- ++ (1,0);
-            \draw (3.5,7) to ++(1.5,0);                
+		\draw (8,5) - ++(0,-0.25) node [rground, rotate=0] {};
+		\draw (c)
+		-| ++(0.5,0.25)
+		to[D,l_=$D_1$] ++ (0,3) |- ++(-0.5,0.25) coordinate (c2);
 
-        \end{scope}    
-        \begin{scope}[color=blue]                
-            \draw (5,2) node[pnp,yscale=-1,rotate=0](T3){} node[right, yshift=1.2em, xshift=0.5em] {$T_3$};
-            \draw (5,2) ++(-0.11,0) circle(0.35);
-            \draw (1.5,2.5) to[short,*-] ++(0.5,0) to [C, -*, l^=$C_3$] ++ (1.5,0) coordinate (qq) to ++(-0,-0.5) to (T3.B);
-            \draw (qq) to[R,Rs,-*,l^=$R_6$] ++(1.5,0);
-            \draw (5,1.5) to[R,Rs,*-*,l^=$R_7$] (5,0);
-            % \draw (5,1.5) to[C,*-,l_=$C_4$] ++(1.5,0);
-            \draw (5,1.5) to[short,*-] ++(1,0);
-            \draw (5,7) to[short,*-]  (T3.C);
-            \draw (3,0) to[short,*-*]  (5,0);
-        \end{scope} 
-        \begin{scope}[color=magenta]  
-            \draw (6.5,0) to[R,Rs,*-,l_=$R_4$] ++(0,1.5);
-            \draw (7.5,0) to[C,*-,] node[right, yshift=-0.5cm] {$C_6$} ++(0,1.5);
-                \draw (6.5,1.5) -- ++(0.5,0) to[short,*-] ++(0.5,0);
+		\draw (7,4) to[pR,Rs, *-, n=POT]  node[right, yshift=-0.3cm,xshift=-1pt, scale=0.8] {$R_{9}$} ++(0,1.5) to (7,7);
+		\draw (7,4) --(6.5,4) |- (POT.wiper);
 
-            \draw (8.5,0) to[R,Rs,*-] node[right, yshift=-0.5cm,xshift=2pt] {$R_{11}$} ++(0,1.5);
-            \draw (10,0) to[vC,
-            *-,] node[left, yshift=-0.4cm] {$C_7$} ++(0,1.5) to ++(-1,0);
-            % \draw (10.5,0) to[C,*-] node[right, yshift=-0.5cm] {$C_8$} ++(0,1.5);
-            % \draw (11.5,0) to[C,*-] node[right, yshift=-0.5cm] {$C_9$} ++(0,1.5);
+		\draw (5,0) -- (10,0);
 
-            \draw (8.5,2.5) node[npn](T4){} node[
-                right, yshift=0em, xshift=0.6em] {$T_4$}  ++(-0.11,0) circle(0.35);
+		\draw (7,2.5) to[C,-*,l_=$C_4$] ++(1,0);
+		\draw (7,2.5) -| (6,1.5);
+	\end{scope}
 
-            \draw (8.5,1.5) to ++(0.5,0);
-            \draw (8.5,1.5) to (T4.E);
-
-            \draw (T4.C) -- (8.5,3) to[short,-*] ++ (0.5,0) -- ++(0.5,0) coordinate (c);   
-
-            \draw (c)
-                -| ++(-0.5,0.75)    
-                ++(0,2)             
-                 |- ++(0.5,0.75) to[short, *-] ++(0,0) to ++ (0,0.5) to[short,-*] (7,7);
-                % to[L,l_=$L_3$] ++ (0,3) |- ++(0.5,0.25);
-
-            \begin{scope}[xshift=9cm, yshift=4.25cm-0.5cm]               
-                \draw (0,0) to[L] (0,0.65);
-                \draw (0,0.675) node[right, yshift=0.337cm] {$L_3$} to[L]  (0,0.675+0.65) ;
-                \draw (0,0.675+0.65) to[L] (0,0.675*2+0.65);
-            \end{scope}
-            \draw (T4.B) to (8,2.5) to (8,3) to [L,l_=$L_4$, mirror] ++ (0,1) 
-                to [short, -*] ++(-1,0) to (7,1.5);
-            \draw (8,5) to [L,l_=$L_5$, mirror] ++ (0,1.5) to[short,-*] ++ (-0.5,0) to ++ (-1.5,0) to ++(0,-1);
-
-            \draw (8,5) to[short, *-] ++(-0.5,0) to[R] node[right, yshift=-0.3cm,xshift=-1pt, scale=0.8] {$R_{10}$} ++(0,1.5);
-
-            \draw (8,5) - ++(0,-0.25) node [rground, rotate=0] {};
-            \draw (c)
-                -| ++(0.5,0.25)                 
-                to[D,l_=$D_1$] ++ (0,3) |- ++(-0.5,0.25) coordinate (c2);
-
-            \draw (7,4) to[pR,Rs, *-, n=POT]  node[right, yshift=-0.3cm,xshift=-1pt, scale=0.8] {$R_{9}$} ++(0,1.5) to (7,7);
-            \draw (7,4) --(6.5,4) |- (POT.wiper);                
-
-            \draw (5,0) -- (10,0);
-
-            \draw (7,2.5) to[C,-*,l_=$C_4$] ++(1,0);
-            \draw (7,2.5) -| (6,1.5);
-        \end{scope}         
-
-        \draw[color=black, fill=black] (5,7) circle (1.5pt) node [right] {$-E$};
-        \draw[color=black, fill=black] (7,7) circle (1.5pt) node [left] {$+E$};
-    \end{circuitikz}
+	\draw[color=black, fill=black] (5,7) circle (1.5pt) node [right] {$-E$};
+	\draw[color=black, fill=black] (7,7) circle (1.5pt) node [left] {$+E$};
+\end{circuitikz}
 \end{document}

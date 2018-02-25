@@ -1,3 +1,5 @@
+%!TEX root = report.tex
+\documentclass[12pt,pdf,hyperref={unicode}, dvipsnames]{beamer}
 \usepackage[english,russian]{babel}
 % \usepackage[T2A,T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -23,19 +25,36 @@
 
 % \setbeamercolor{frametitle right}{fg=white,bg=Brown!85}
 % \setbeamercolor{frametitle}{fg=white,bg=Brown!85}
-\setbeamercolor{frametitle right}{fg=white,bg=black!85}
-\setbeamercolor{frametitle}{fg=white,bg=black!85}
+\setbeamercolor{frametitle right}{fg=white,bg=black!95}
+\setbeamercolor{frametitle}{fg=white,bg=black!95}
 
+\setbeamertemplate{frametitle}[default][colsep=-4bp,rounded=false,shadow=false]
+% \setbeamertemplate{frametitle}
+% {
+%     \nointerlineskip
+%     \begin{beamercolorbox}[sep=0.3cm,ht=1.8em,wd=\paperwidth]{frametitle}
+%         \vbox{}\vskip-2ex%
+%         \strut\insertframetitle\strut
+%         \vskip-0.8ex%
+%     \end{beamercolorbox}
+% }
+\setbeamercolor{section in head/foot}{fg=white, bg=black}
+\setbeamertemplate{frametitle}{%
+    \nointerlineskip%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.6ex]{frametitle}
+        \hspace*{1ex}\insertframetitle%
+    \end{beamercolorbox}%
+}
 \setbeamertemplate{headline}{}
 \setbeamertemplate{footline}{}
 \let\Tiny=\tiny % решает проблему со шрифтами в TexLive
-\setbeamertemplate
-	{footline}{
-		\color{black!40!white}
-		\quad\hfill
-		\insertframenumber/\inserttotalframenumber
-		\hfill\vspace{1em}\quad
-	} 
+% \setbeamertemplate
+% 	{footline}{
+% 		\color{black!40!white}
+% 		\quad\hfill
+% 		\insertframenumber/\inserttotalframenumber
+% 		\hfill\vspace{1em}\quad
+% 	} 
 
 \setbeamertemplate{navigation symbols}{}
 
@@ -54,3 +73,37 @@
 }
 \setbeamercolor{item projected}{bg=black,fg=white}
 \setbeamercolor{title}{bg=black,fg=white}
+
+\newcommand\frametitless[1]{\subsection{#1}\frametitle{#1}}
+
+\usepackage{booktabs, setspace}
+\usepackage{esdiff,esint}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\title[]{Модель нейрона с подпороговыми колебаниями}
+\institute{Радиофизический факультет ННГУ, 420 группа}
+\date{Нижний Новгород, 2018}
+
+\usepackage[font=footnotesize,justification=centering]{caption}
+\captionsetup[figure]{labelformat=empty}%
+% \setbeamertemplate{caption}[default]
+\usefonttheme{professionalfonts}
+\defbeamertemplate*{background canvas}{mydefault}
+    {%
+      \ifbeamercolorempty[bg]{background canvas}{}{\color{bg}\vrule width\paperwidth height\paperheight}% copied beamer default here
+    }
+
+    \defbeamertemplate*{background canvas}{bg}
+    {%
+      \color{black}\vrule width\paperwidth height\paperheight% added bg color
+    }
+
+    \BeforeBeginEnvironment{frame}{%
+      \setbeamertemplate{background canvas}[mydefault]%
+    }
+
+    \makeatletter 
+    \define@key{beamerframe}{bg}[true]{%
+      \setbeamertemplate{background canvas}[bg]%
+    }
+    \makeatother

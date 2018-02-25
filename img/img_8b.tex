@@ -1,186 +1,34 @@
-\documentclass[tikz, border=1pt]{standalone}
-\usepackage{cmap}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8x]{inputenc}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{xcolor}
-\usepackage{amsmath,amssymb}
-% \pgfplotsset{compat=newest}
-\usetikzlibrary{decorations.markings}
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{patterns}
-
+\input{img.tex}
 \begin{document}
-\definecolor{color0}{HTML}{e2431e}
-\definecolor{color1}{HTML}{e7711b}
-\definecolor{color2}{HTML}{f1ca3a}
-\definecolor{color3}{HTML}{6f9654}
-\definecolor{color4}{HTML}{1c91c0}
-\definecolor{color5}{HTML}{43459d}
-
-	\begin{tikzpicture}[
-			    lin/.style={
-				line width=0.8pt, mark=none,black
-			},
-			fst/.style={
-				lin,color5,opacity=0.4
-			},	]
-
-    % \xdef\darkness{0}
-    % \xdef\op{0.5}
-
-    % \xdef\xSIZE{5}
-    % \xdef\ySIZE{5}
-
-    % \draw[step=1.0,blue,thick,opacity=\op] (0,0) grid (\xSIZE,\ySIZE);
-    % \draw[step=0.5,blue,very thin,opacity=\op] (0,0) grid (\xSIZE,\ySIZE);
-
-    % \foreach \i in {0,1,...,\ySIZE} {
-    %   \draw[opacity=\op] (0,\i) node [left] {\i};
-    % }
-    % \foreach \i in {0,1,...,\xSIZE} {
-    %   % \draw[opacity=\op] (0,\i) node [left] {\i};
-    %   \draw[opacity=\op] (\i,0) node [below] {\i};
-    % }    
-
-		    \begin{axis}[
-			% grid=none,
-			scale=1.2,
-			% xmode=log,
-			% grid style={line width=.1pt, draw=gray!10},
-			% major grid style={line width=.2pt,draw=gray!50},
+\begin{tikzpicture}
+	\begin{axis}[
+			% scale=1.2,
 			axis lines=middle,
-			% minor tick num=5,
-			% xmin=1000, 
-			% xmax=11,
-			% ymin=0,
-			% ymax=5,
 			xlabel={$u_\text{б}$},
 			ylabel={$i_k$, $i_\text{б}$},
-			% tick style={very thick},
-		    % scale=0.5,
-		    % grid=both,
-		    % grid style={line width=1pt, draw=black!20},
-		    major grid style={line width=.5pt,draw=black!90},
-		    % minor y tick num=4,
-		    % minor x tick num=4,   
-		     % xmode=log,
-		    % xmode=log,ymode=normal,
-		    xtick distance=1,
-		    ytick distance=1,
-		    % ymax = 1.8,
-		    % xmin = 0,
-		    % ymin = 0,
-			% yticklabel={
-			% \pgfmathparse{\tick/0.098171875/32}
-			% \pgfmathifisint{\pgfmathresult}{$\pgfmathprintnumber[int detect]{\pgfmathresult}{}$}%
-			% {%
-	  %          {$\pgfmathprintnumber[frac, frac denom=32,frac whole=false]{\pgfmathresult}\pi$}
-			% }{}
-			% },	
-			% xtick={0,},ytick={0},
-			xtick={0,1,2,3}, 
-			ytick={0,0.5,1}, 
-			% yticklabels={2,3},%
-			% xticklabels={1,2,3},%
-			% $\frac{\pi}{4}$
-			% 1},			
-		    xmin = 0,
-		    xmax = 3.5,
-		    % ymin = 0,
-		    ymax = 1.4,
-		    % ticklabel style={font=\tiny,fill=white},    
-		 %    % axis lines=middle, 	
-		 %    xlabel style={xshift=2em},
-		    % ylabel style={yshift=2em},			
-		 %    lin/.style={
-			% 	line width=0.7pt, mark=none,black
-			% },
-			% fst/.style={
-			% 	lin,color0,opacity=0.7
-			% },		
+			major grid style={line width=.5pt,draw=black!90},
+			xtick distance=1,
+			ytick distance=1,
+			xtick={0,1,2,3},
+			ytick={0,0.5,1},
+			xmin = 0,
+			xmax = 3.5,
+			ymax = 1.4,
 			extra x ticks={-1.2},
-			% extra y ticks={1.05},
-			extra x tick style={%
-			    % grid=major,
-			},
-			% extra y tick style={%
-			%     % grid=major,
-			% },			
+			extra x tick style={},
 			extra x tick labels={
-			    {u=I}
-			},
-			% extra y tick labels={
-			%     $I_\text{с.0}$
-			% },			
-			% unit vector ratio*=1 1,		
+					{u=I}
+				},
 		]
 
+		\addplot+[samples=200, ochre, opacity=0.5,domain=0.5:2.1-0.2,] {0.772*(x-0.5)^2+0.022*(x-0.5)+-0.155*(x-0.5)^3};
+		\addplot+[samples=200, ochre, opacity=0.5,domain=0.5:2.33-0.2,] {0.507*(x-0.5)^2+0.001*(x-0.5)+-0.061*(x-0.5)^3};
+		\addplot+[samples=200, ochre, opacity=0.5,domain=0.5:2.57-0.2,] {0.176*(x-0.5)^2+0.067*(x-0.5)+0.044*(x-0.5)^3};
+		\addplot+[samples=200, ochre, opacity=0.5,domain=0.5:2.8-0.2,] {0.046*(x-0.5)^2+0.083*(x-0.5)+0.065*(x-0.5)^3};
+		\addplot+[samples=200, violet,domain=0.5:2.75-0.2] {0.944*(x-0.5)^2+0.021*(x-0.5)+-0.374*(x-0.5)^3};
 
-		% \addplot +[
-		%   	fst,
-		%   	decoration={
-		% 	  	markings,
-		% 		mark=at position 0.14 with {\arrow[scale=1.5, thick]{latex};},
-		% 		mark=at position 0.2 with {\arrow[scale=-1.5, thick]{latex};},
-		% 		mark=at position 0.54 with {\arrow[scale=1.5, thick]{latex};},
-		% 		mark=at position 0.78 with {\arrow[scale=-1.5, thick]{latex};},
-		% 	},
-  %           postaction={decorate},		 
-		% 	] plot table[x=x,y=y] {../data/img_3a.tsv};
+		\draw[black,decoration={markings,mark=at position 1 with {\arrow[scale=1.5, rotate=-0,thick]{latex};},},            postaction={decorate}] (axis cs:2,1.2) -- node[above, sloped, midway] {$u_\text{0}$ меньше} (axis cs: 3,1);
 
-
-		% \draw[
-		% 	fst,
-		% 	decoration={markings,mark=at position 1 with {\arrow[scale=1.5, rotate=-0,thick]{latex};},},   postaction={decorate}] 
-		% (axis cs: {-0.549},{-0.631}) -- (axis cs: {2.097},{-0.631});
-
-		% \draw[
-		% 	fst,
-		% 	decoration={markings,mark=at position 1 with {\arrow[scale=1.5, rotate=-0,thick]{latex};},},   postaction={decorate}] 
-		% (axis cs: {1.215},{2.1126}) -- (axis cs: {-1.4305},{2.1126});
-
-		% \draw[
-		% name path=A,draw=none
-		% ]
-		% (axis cs: {2.2},{-1.5})--(axis cs: {-1.2},{-1.5}) ;
-
-
-		\addplot+[samples=200, fst,domain=0.5:2.1-0.2,] {0.772*(x-0.5)^2+0.022*(x-0.5)+-0.155*(x-0.5)^3};
-		\addplot+[samples=200, fst,domain=0.5:2.33-0.2,] {0.507*(x-0.5)^2+0.001*(x-0.5)+-0.061*(x-0.5)^3};
-		\addplot+[samples=200, fst,domain=0.5:2.57-0.2,] {0.176*(x-0.5)^2+0.067*(x-0.5)+0.044*(x-0.5)^3};
-		\addplot+[samples=200, fst,domain=0.5:2.8-0.2,] {0.046*(x-0.5)^2+0.083*(x-0.5)+0.065*(x-0.5)^3};
-		\addplot+[samples=200, lin,domain=0.5:2.75-0.2,black] {0.944*(x-0.5)^2+0.021*(x-0.5)+-0.374*(x-0.5)^3};
-		
-		\draw[lin,decoration={markings,mark=at position 1 with {\arrow[scale=1.5, rotate=-0,thick]{latex};},},            postaction={decorate}] (axis cs:2,1.2) -- node[above, sloped, midway] {$u_\text{0}$ меньше} (axis cs: 3,1);
-		
-		% \addplot[magenta, opacity=0.1,] fill between[of=A and B];
-		% max:
-		% x=1.215
-		% x=-1.4305
-		% y=2.1126
-
-			% node[left,pos=0,black,opacity=1] {$0$ мА};
-  		% \addlegendentry{$U_\text{с.}=-1$ В}
-		% \addplot +[lin,color4,opacity=0.7,fst] plot [error bars/.cd, y dir = both, y explicit] table[x=x,y=y2] {../data/ris7.tsv} ;
-		% 	% node[left,pos=0, yshift=-5em,black,opacity=1] {$0$ мА};
-  % 		\addlegendentry{$U_\text{с.}=-1.5$ В}
-
-		% \addplot +[lin,color3,opacity=0.7,fst] plot [error bars/.cd, y dir = both, y explicit] table[x=x,y=y3] {../data/ris7.tsv} ;
-		% 	% node[left,pos=0,black,opacity=1] {$0$ мА};
-  % 		\addlegendentry{$U_\text{с.}=-3.5$ В}
-
-		% \addplot +[lin,color5,opacity=1,fst,thick] plot [error bars/.cd, y dir = both, y explicit] table[x=x,y=y] {../data/ris7c.tsv} ;
-		% 	% node[left,pos=0, xshift=-2em,black,opacity=1] {$0$ мА};
-
-		% \draw[->, opacity=1, line width=0.5pt, dashed] (axis cs:0,1.05) -- ++(axis cs:2.4,0) node[right,black,opacity=1] {$u_\text{з.и.}$, В };
-		% \draw[->, opacity=1, line width=0.5pt, dashed] (axis cs:1.52,0) -- ++(axis cs:0,2) node[above,black,opacity=1] {$i_\text{с.}$, мА};
-		% \draw[fill=color5, color5] (axis cs:-1.2,0.768) circle (2pt);
-
-		% \draw[opacity=0.5, line width=0.5pt, dashed] (axis cs:0.575,0) -- ++(axis cs:0,2.145);
-		% \draw (0,0) -- (1,1);
-
-		    \end{axis}
-		\end{tikzpicture}	
+	\end{axis}
+\end{tikzpicture}
 \end{document}

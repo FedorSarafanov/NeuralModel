@@ -1,21 +1,4 @@
-\documentclass[10pt,pdf,hyperref={unicode}, dvipsnames]{beamer}
 \input{preambule.tex}
-\newcommand\frametitless[1]{\subsection{#1}\frametitle{#1}}
-\usepackage{booktabs, setspace}
-\newcommand{\tabitem}{~~\llap{\textbullet}~~}
-\setbeamertemplate{caption}{\raggedright\insertcaption\par}
-\title[]{Твердотельный лазер на керамике с волоконно-лазерной накачкой}
-
-\author{%
-	Геликонова В.Г., %
-	Платонова М.В., %
-	Сарафанов Ф.Г. %
-}
-
-\institute{Радиофизический факультет ННГУ, 420 группа}
-
-\date{Нижний Новгород, 2017}
-
 \begin{document}  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,475 +10,266 @@
 	\end{beamercolorbox}
 	\vspace{0.5cm}
 	\normalsize \textbf{Работу выполнили:}\\
-	\large\insertauthor\\ 
+	\large
+	\underline{Платонова М.В.}, %
+	Сарафанов Ф.Г., %
+	Геликонова В.Г. %
+	% {Рогов М.А.,}
+	\\ 
 	\vspace{0.5cm}
 	\normalsize{\textbf{Научный руководитель:}\\}
-	\large{Антипов О.Л.}
+	\large{Щапин Д.С.}
 	\vfill
-	\small{Нижний Новгород -- 2017}
+	\small{Нижний Новгород -- 2018}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
-%   \frametitle{Содержание}
-%   \tableofcontents
+% \begin{frame}[t]s
+% 	\frametitle{Содержание}
+% 	% \fontsize{6pt}{7.2}\selectfont
+% 	\setbeamerfont{subsection in toc}{size=\tiny}
+% 	\setbeamerfont{section in toc}{size=\tiny}
+% 	\tableofcontents
 % \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Цели работы}
 \begin{frame}[t]
 	\frametitle{Цели работы}
 	% \textbf{Цели}\\
 	\vfill
-\begin{spacing}{1}
-	\begin{enumerate}
-		\item Ознакомиться с принципами работы  лазера
-		\item Измерить мощность волоконного и твердотельного лазеров
-		\item Поучаствовать в эксперименте по созданию лазера и измерению его параметров	
-	\end{enumerate}
-\end{spacing}
+	\begin{spacing}{1}
+		\begin{enumerate}
+			\item Ознакомиться с моделью нейрона с подпороговыми колебаниями
+			\item Изучить модельные уравнения и эквивалентную схему
+			\item Создать компьютерную модель нейрона
+			\item Рассмотреть физическую реализацию модели в виде электронной установки
+			\item Получить экспериментальные данные с установки и сравнить с теоретическими
+		\end{enumerate}
+	\end{spacing}
 	\vfill
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Глоссарий работы}
+	\begin{spacing}{1}
+		\begin{enumerate}
+			\item \textbf{Нейрон} – клетка, главное рассматриваемое свойство которой -- способность к генерации импульса возбуждения
+			\item \textbf{Подпороговые колебания} – колебания квазигармонического типа, спонтанно возникающие в нейроне
+			\item \textbf{Спайк} – единичный импульс, генерируемый нейроном как отклик на внешнее воздействие выше порога возбуждения
+			\item \textbf{Спайк-берст} – режим колебаний, при котором на одном высоком периоде генерируется больше одного спайка  
+		\end{enumerate}
+		\vspace{1em}
+		Способность нейрона к подпороговым колебаниям и генерации импульсов отражена в рассматриваемой модели.
+	\end{spacing}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Теоретическая часть}
-\begin{frame}[t]
-	\frametitless{Виды переходов электронов между уровнями энергии}
-	\begin{enumerate}
-		\item \textbf{Спонтанное излучение}
-	\end{enumerate}
-	\begin{center}
-		\includegraphics[]{images/spont}
-	\end{center}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-	\frametitless{Виды переходов электронов между уровнями энергии}
-	\begin{enumerate}
-		\setcounter{enumi}{1}	
-		\item \textbf{Вынужденное излучение}
-	\end{enumerate}
-	\begin{center}
-		\includegraphics[]{images/forced}
-	\end{center}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t] 
-	\frametitless{Устройство лазера}
-	\textbf{Лазер} [\textbf{L}ight \textbf{A}mplification by \textbf{S}timulated \textbf{E}mition of \textbf{R}adiation ] -- устройство, усиливающее свет посредством вынужденного излучения.
-
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.3\textwidth]{images/las1}
-	\end{figure}	
-
-
-
-
-	Основные составляющие:
-		\vspace{1em}
-	\begin{columns}[t]
-		\begin{column}{0.45\textwidth}
-			% \begin{enumerate}
-				\textbf{1} -- Активная (рабочая) среда\\
-				\textbf{2} -- Система накачки (источник энергии)
-			% \end{enumerate}
-		\end{column}
-		\begin{column}{0.45\textwidth}
-			% \begin{enumerate}
-				% \setcounter{enumi}{2}		
-				\textbf{3} -- Непрозрачное зеркало\\
-				\textbf{4} -- Полупрозрачное зеркало
-			% \end{enumerate}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-	\frametitless{Накачка}
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=0.8]
-		{images/lvl}
-	\end{figure}		
-	\textbf{Накачка} -- процесс создания инверсии населенностей в активной среде 
-
-	\vspace{1em}
-	\textbf{Инверсия населенностей} -- состояние вещества, при  котором на высоком рабочем уровне энергии находится большее количество электронов, чем на нижнем
-
-	\vspace{1em}
-	Виды накачки: 
-	\begin{enumerate}
-		\item оптическая – за счет энергии света
-		\item электрическая – накачка электрическим током
-		\item химическая – с использованием энергии химических реакций
-	\end{enumerate}	
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-	\frametitless{Активные среды и энергетические уровни}
-
+\begin{frame}[c]
+	\frametitle{Подпороговые колебания в нейронах}
 	\begin{columns}
 		\begin{column}{0.49\textwidth}
 			\begin{figure}[h]
 				\centering
-				\includegraphics[]{images/3nd}
-				\caption{3-уровневая среда}
-			\end{figure}	
+				\includegraphics[]{img/img_1a}
+				\caption[]{Колебания в нейронах ствола головного мозга}
+			\end{figure}
 		\end{column}
 		\begin{column}{0.49\textwidth}
 			\begin{figure}[h]
 				\centering
-				\includegraphics[]{images/4nd}
-				\caption{4-уровневая среда}
-			\end{figure}	
+				\includegraphics[]{img/img_1d}	
+				\caption[]{Подпороговые колебания в нейронах коры головного мозга}
+			\end{figure}
 		\end{column}
 	\end{columns}
-	\vspace{1em}
-	В лазере сначала происходит спонтанный переход, фотоны от него создают вынужденное излучение других фотонов, когерентных первоначальным, таким образом возникает фотонная лавина, усиливающаяся в резонаторе
-
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]
-	\frametitless{Резонатор}
-
-	\vfill
-	\begin{figure}[h]
+	\frametitle{Генератор Ван-дер-Поля: фазовый портрет}
+	\vspace{-1em}
+	% \vspace{1em}
+	\begin{columns}
+		\begin{column}{0.49\textwidth}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.99]{img/img_2a}
+				\caption{$\gamma<0$:\\ устойчивый фокус}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.49\textwidth}
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.99]{img/img_2b}
+				\caption{$\gamma>0$:\\ предельный цикл}
+			\end{figure}
+		\end{column}
+	\end{columns}	
+	\begin{columns}[c]
+		\begin{column}{0.49\textwidth}
 		\centering
-		\includegraphics[]{images/resonator}
-		\caption{Простейший резонатор}
-	\end{figure}	
-	\vfill 
-	В простейшем случае представляет собой два зеркала, установленных друг напротив друга, одно из которых полупрозрачное -- через него луч лазера частично выходит из резонатора
-	% Для увеличения мощности выходного излучения применяют модуляцию добротности – уменьшают пропускную способность непрозрачного зеркала
+		В данной системе реализуются подпороговые колебания:
+		% При $\gamma=0$ происходит бифуркация Андронова-Хопфа и рождается предельный цикл
+		\end{column}
+		\begin{column}{0.49\textwidth}
+	\begin{equation*}
+		\left\{
+		\begin{aligned}
+			\diff{y}{t} & =\mu(\gamma-x^2)y-\omega^2x\\%; \qquad
+			\diff{x}{t}  &=y, \quad \mu \ll 1
+		\end{aligned}
+		\right.
+	\end{equation*}		
+		\end{column}
+	\end{columns}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
-% 	\frametitless{Модуляция добротности}
-% 	\textbf{Модуляция добротности} -- метод, применяемый для получения импульсного режима работы лазера
-
-% 	\vspace{1em}
-% 	Некоторые методы модуляции:
-
-% 	\begin{enumerate}
-% 		\item Вращающееся зеркало
-% 		\item Ячейки Поккельса (электрооптические затворы)
-% 		\item Насыщающийся поглотитель
-% 		\item Акустооптическая модуляция
-
-% 	\end{enumerate}
-% 	\begin{columns}
-% 		\begin{column}{0.3\textwidth}
-% 			\begin{figure}[h]
-% 				\centering
-% 				\includegraphics[]{images/rot_flip}
-% 				% \caption{3-уровневая среда}
-% 			\end{figure}	
+\begin{frame}[t]
+	\frametitle{Модель ФитцХью-Нагумо: фазовый портрет}
+	Способность к генерации спайков реализуется с помощью модели ФХН. Это простейшая система, обладающая порогом возбуждения:
+	\vspace{1em}
+	\begin{columns}[c]
+		\begin{column}{0.59\textwidth}
+			\vspace{-3em}
+			\begin{figure}[h]
+				\centering
+				\hspace{1em}\includegraphics[]{img/img_3a}
+				% \caption{3-уровневая среда}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.39\textwidth}
+			$
+				\left\{
+				\begin{aligned}
+					\diff{u}{t} & =f(u)-v           \\
+					\diff{v}{t} & =\varepsilon(u-I)
+				\end{aligned}
+				\right.
+			$\\
+			\vspace{1em}
+			$I$ -- параметр порога возбуждения\\
+			\vspace{1em}
+			$f(u)$ -- кубическая функция\\
+			\vspace{1em}
+			$\varepsilon \ll 1$
+		\end{column}
+	\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Схема экспериментальной установки}
+	\begin{figure}[h]
+		% \hspace{-2em}
+		\includegraphics[]{img/img_6}
+		% \caption{}
+	\end{figure}
+\end{frame}
+\section{Результаты эксперимента}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Подпороговые колебания}
+	\begin{figure}[h]
+		\hspace{-2em}
+		\includegraphics[]{img/osci}
+		% \caption{}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Один спайк на несколько периодов}
+	\begin{figure}[h]
+		\hspace{-2em}
+		\includegraphics[]{img/spike}
+		% \caption{}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Один спайк на период}
+	\begin{figure}[h]
+		\hspace{-2em}
+		\includegraphics[]{img/onespike}
+		% \caption{}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Два спайка на периоде}
+	\begin{figure}[h]
+		\hspace{-2em}
+		\includegraphics[]{img/twospike}
+		% \caption{}
+	\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[bg]
+	\frametitle{Спайк-берст}
+	\begin{figure}[h]
+		\hspace{-1.3em}
+		\centering
+		\includegraphics[]{img/berst}
+		\vspace{-1.5em}
+		\caption{Эксперимент}
+	\end{figure}
+	\begin{figure}[h]
+	% \vspace{-1em}
+		\hspace{-2em}
+		\centering
+		\includegraphics[]{img/berst_matlab}
+		\vspace{-1.5em}
+		\caption{Компьютерная модель}
+	\end{figure}	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Компьютерная модель}
+% \begin{frame}%[bg]
+% 	\frametitle{Результаты компьютерного моделирования}
+% 		\vspace{-2em}
+% 	\begin{figure}[h]
+% 		\hspace{-2em}
+% 		\includegraphics[]{img/berst_matlab}
+% 		% \caption{}
+% 	\end{figure}
+	
+% 	\begin{columns}[t]
+% 		\begin{column}{0.60\textwidth}
+% 			\vspace{-3em}
+% 			\begin{equation*}
+% 				\left\{
+% 				\begin{aligned}
+% 					\varepsilon_1\diff{u}{t} & =f(u)-v-d\cdot x\\
+% 					\diff{v}{t} & =\varepsilon_2(u-I)\\
+% 					\diff{x}{t} & =y\\
+% 					\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\Omega^2(u,I)\cdot x
+% 				\end{aligned}
+% 				\right.
+% 			\end{equation*}
 % 		\end{column}
-% 		\begin{column}{0.3\textwidth}
-% 			\begin{figure}[h]
-% 				\centering
-% 				\includegraphics[]{images/pockels_cell}
-% 				% \caption{4-уровневая среда}
-% 			\end{figure}	
+% 		\begin{column}{0.2\textwidth}
+% 			$a=0.1$\\
+% 			$\varepsilon_1=0.001$\\
+% 			$\varepsilon_2=1.5$\\
+% 			$\gamma=0.21$\\
+% 			$\omega=1$\\
 % 		\end{column}
-% 		\begin{column}{0.3\textwidth}
-% 			\begin{figure}[h]
-% 				\centering
-% 				\includegraphics[]{images/pogl}
-% 				% \caption{4-уровневая среда}
-% 			\end{figure}	
+% 		\begin{column}{0.19\textwidth}
+% 			$\alpha=5$\\
+% 			$\beta=10$\\
+% 			$I=-0.09$\\
+% 			$d=0.85$\\
 % 		\end{column}		
 % 	\end{columns}
-% 		% Основная идея метода состоит в том, что во время накачки намеренно «ухудшают» свойства оптического резонатора, не давая, таким образом, лазеру излучать.
-
-% 		% Благодаря этому мощность не расходуется на излучение и удаётся получить высокий уровень инверсной населённости энергетических уровней активной среды. 
-
-% 		% Далее свойства резонатора быстро «улучшают», и вся накопленная энергия реализуется в виде короткого, мощного импульса.	
 % \end{frame}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}[t]
-% 	\frametitless{Акустооптическая модуляция добротности}
-% 			\begin{figure}[h]
-% 				\centering
-% 				\includegraphics[]{images/aom}
-% 				% \caption{4-уровневая среда}
-% 			\end{figure}	
-% Акустооптический модулятор представляет собой участок оптически про­зрачной среды, в котором возбуждается бегущая ультразвуковая волна.
-% \\~\\
-% Из-за наличия фотоупругого эффекта среду можно рассматривать как фазовую дифракционную решетку, на которой часть светового пучка в лазере дифрагирует и выходит из лазера, ухудшая добротность.
-% \end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Моды резонатора}
-	\vfill
-	\begin{columns}
-		\begin{column}{0.49\textwidth}
-				\textbf{Мода резонатора} может трактоваться как структура поля, в продольном или поперечном направлениях
-				\vspace{1em}
-
-			% \textbf{Поперечные моды} --
-			 % обобщение			продольных,
-			 % определяются
-			% набором частот и
-			% распределением поля в пучке
-			% (структура поля в поперечном направлении)
-				% \vspace{1em}
-
-			\textbf{Основная мода} -- мода,
-			имеющая наименьшую расходимость
-% \vspace{1em}
-% 			В простых плоскозеркальных
-% 			резонаторах остаются только моды,
-% 			для которых расстояние между
-% 			зеркалами:
-
-% 			\begin{equation*}
-% 			L= q\frac{\lambda}{2}
-% 			\end{equation*}
-% 			(q – порядок моды)	
-		\end{column}
-		\begin{column}{0.49\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=\textwidth]{photo/light}
-				\caption{Основная поперечная мода лазера на керамике}
-			\end{figure}	
-		\end{column}
-	\end{columns}	
-	\vfill
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]
-	\frametitless{Некоторые виды лазеров}
-	% \vfill
-	\vspace{-1em}
-
-	\begin{columns}
-		\begin{column}{0.3\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.8\textwidth]{photo/las_g}
-				\caption{Газовый лазер}
-			\end{figure}	
-		\end{column}
-		\begin{column}{0.3\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.8\textwidth]{photo/las_f}
-				\caption{Волоконный лазер}
-			\end{figure}	
-		\end{column}
-		\begin{column}{0.3\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.8\textwidth]{photo/las_s}
-				\caption{Лазер на керамике}
-			\end{figure}	
-		\end{column}		
-	\end{columns}
-	\begin{center}
-  \begin{tabular}{*{4}{l}}
-    \toprule
-    Вид лазера & Рабочая среда & Длина волны & Мощность \\
-    \midrule
-    газовый & газ & 633 нм & 5  мВт\\
-    % \midrule
-    волоконный & волокно & 1670 нм & 40 Вт\\
-    % \midrule
-    твердотельный & кристалл/керамика & 2066 нм & 10 Вт\\
-    \bottomrule
-  \end{tabular}		
-	\end{center}
-	%\vspace{-1em}	
-% \vfill
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}
-	\frametitless{Схема установки}
-	\begin{figure}[tb]
-		\centering
-		\includegraphics[width=1\textwidth]{images/chem}
-	\end{figure}
-	\vspace{1cm}
-	\begin{columns}
-		\begin{column}{0.4\textwidth}
-			\textbf{1} -- волоконный лазер накачки\\ 
-			\textbf{2a, 2b} -- резонатор\\
-			% \textbf{2a, 2b} -- зеркала резонатора\\
-			\textbf{3} -- активная среда
-		\end{column}
-		% \hspace{1.6cm}
-		\begin{column}{0.4\textwidth}
-			\textbf{4a} -- диэлектрическое зеркало\\
-			\textbf{4b} -- зеркало\\
-			\textbf{5} -- камера
-		\end{column}
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Диэлектрическое зеркало}
-	\begin{columns}
-		\begin{column}{0.49\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[]{images/interf}
-				\caption{Конструктивная интерференция}
-			\end{figure}	
-			\begin{figure}[h]
-				\centering
-				\includegraphics[]{images/interf2}
-				\caption{Деструктивная интерференция}
-			\end{figure}			
-		\end{column}
-		\begin{column}{0.49\textwidth}
-			\begin{figure}[h]
-				\centering
-				\includegraphics[]{images/df}
-				% \caption{4-уровневая среда}
-			\end{figure}	
-		\end{column}
-	\end{columns}	
-\end{frame}
-% Диэлектрическое зеркало представляет собой пачку слоев с чередующимся показателем преломления. 
-
-% Толщина слоев подобрана таким образом, чтобы для избранной длины волны лабмда_0 оптический путь волны в слое был пропорционален половине длины волны.
-
-% Отраженная часть пучка и преломленная в зеркале интерферируют. Для избранной длины волны интерференция конструктивная -- зеркало отражает, для всех остальных деструктивная - отражение ухудшается по мере удаления от длины волны ламбда 0 или вообще исчезает.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Волоконный лазер}
-% В качестве активной среды выступает волоконный световод, легированный добавками.
-% \\~\\
-% Оптический резонатор обычно реализуется из решеток Брэгга (структура волокна с модулированным $n$)
-	% \vfill
-	% \begin{columns}[c]
-		% \begin{column}{0.7\textwidth}
-			\begin{figure}[tb]
-				\centering
-				\includegraphics%[width=1\textwidth]
-				{images/fil}
-			\end{figure}
-		% \end{column}
-		% \hspace{1.6cm}
-	% 	\begin{column}{0.3\textwidth}
-	% 		\begin{figure}[tb]
-	% 			\centering
-	% 			\includegraphics[width=1\textwidth]
-	% 			{photo/light.jpg}
-	% 		\end{figure}
-	% 	\end{column}
-	% \end{columns}	
-	
-	% \vfill
-		\vspace{1cm}
-	\begin{columns}
-		\begin{column}{0.4\textwidth}
-			\textbf{1} -- активная среда (легированное волокно)\\ 
-			\textbf{2} -- волновод накачки\\
-			\textbf{3} -- внешняя оболочка
-		\end{column} 
-		% \hspace{1.6cm}
-		\begin{column}{0.4\textwidth}
-			\textbf{4} -- излучение накачки\\
-			\textbf{5} -- излучение генерации\\
-			\textbf{6} -- волоконная брэгговская решетка\\
-			\textbf{7} -- накачка (диодный лазер)%\\
-			% \textbf{5} -- камера
-		\end{column}
-	\end{columns}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t] 
-	\frametitless{Зависимость излучения волоконного лазера от тока}
-		\begin{figure}[tb]
-		\centering
-		\includegraphics[width=0.9\textwidth]{img/PI}
-	\end{figure}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Лазер на керамике}
-	
-	\begin{columns}
-		\begin{column}{0.63\textwidth}
-			\begin{figure}[tb]
-				\centering
-				\includegraphics[width=\textwidth]{photo/s.jpg}
-				\caption{Экспериментальный лазер на керамике}
-			\end{figure}
-		\end{column}
-		% \hspace{1.6cm}
-		\begin{column}{0.4\textwidth}
-			\begin{figure}[tb]  
-				\centering
-				\includegraphics[width=\textwidth]{photo/ke.jpg}
-				\caption{Структура керамики}
-			\end{figure}
-		\end{column}
-	\end{columns}	
-		\vspace{1em}
-	\begin{columns}
-		\begin{column}{0.6\textwidth}
-			\textbf{1} -- выходное зеркало резонатора \\
-			\textbf{2} -- входное зеркало резонатора \\
-			% ,\textbf{2} -- зеркала резонатора\\ 
-			\textbf{3} -- активная среда с термостабилизацией
-		\end{column}
-		% \hspace{1.6cm}
-		\begin{column}{0.4\textwidth}
-			Характерный размер зерна керамики (кристаллита) $\sim 500$ нм $\Rightarrow$ малые потери на рассеяние
-		\end{column}
-	\end{columns}	
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Зависимость излучения лазера на керамике от тока}
-		\begin{figure}[tb]
-		\centering
-		\includegraphics[height=0.85\textheight]{img/P2I2}
-	\end{figure}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Настроенная мода лазера на керамике}
-	\vfill
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=\textwidth]{photo/light}
-				\caption{Основная поперечная мода лазера на керамике}
-			\end{figure}	
-	\vfill
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\begin{frame}[t]
-	\frametitless{Зависимость излучения лазера на керамике от мощности накачки}
-		\begin{figure}[tb]
-		\centering
-		\includegraphics[width=0.73\textwidth]{img/P2P1}
-	\end{figure}
-\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitless{Выводы}
+	\frametitle{Выводы}
 	\begin{enumerate}
-		\item Осуществлено знакомство с принципами работы  лазера
-		\item Измерена мощность волоконного лазера
-		\item Проведен эксперимент по созданию и настройке лазера на керамике:\\
-		\vspace{0.5em}
-		-- на собранном лазере проведена юстировка системы зеркал\\
-		-- лазер путём подвижки зеркал настроен на пучок, обладающий хорошей мощностью и близкий к одномодовому режиму
-		\vspace{0.5em}
-		\item Измерена мощность лазера на керамике\\
-		\vspace{0.5em}
-		-- найден порог генерации: на мощности накачки $\sim13$ Вт начинается устойчивая генерация
+		\item Осуществлено знакомство с моделью нейрона с подпороговыми колебаниями
+		\item Качественно исследованы простейшие уравнения, соответствующие квазигармоническим колебаниям и порогу возбуждения
+		\item Получены подпороговые колебания, спайк и спайк-берст режим на экспериментальной установке
+		\item Реализована компьютерная модель системы, на которой был получен спайк-берст режим, пёоказано качественное соответствие режиму, полученному эксперементально
 	\end{enumerate}
 \end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}[plain]
 	\vspace{4cm}
 	\begin{center}
@@ -504,7 +278,7 @@
 	\end{center}
 	\vspace{2.5cm}
 	\begin{center}
-		\color{black!30!white}
+		\color{black!60!white}
 		Презентация подготовлена в издательской \\
 		системе LaTeX с использованием пакетов \\
 		PGF/TikZ и Beamer

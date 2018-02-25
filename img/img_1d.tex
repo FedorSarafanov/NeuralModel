@@ -1,139 +1,48 @@
-\documentclass[tikz, border=1pt]{standalone}
-\usepackage{cmap}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8x]{inputenc}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{xcolor}
+\input{img.tex}
 \begin{document}
-% series: {
-%             0: { color: '#e2431e' },
-%             1: { color: '#e7711b' },
-%             2: { color: '#f1ca3a' },
-%             3: { color: '#6f9654' },
-%             4: { color: '#1c91c0' },
-%             5: { color: '#43459d' },
-\definecolor{color0}{HTML}{e2431e}
-\definecolor{color1}{HTML}{e7711b}
-\definecolor{color2}{HTML}{f1ca3a}
-\definecolor{color3}{HTML}{6f9654}
-\definecolor{color4}{HTML}{1c91c0}
-\definecolor{color5}{HTML}{43459d}
-	\begin{tikzpicture}
-		    \begin{axis}[
-			grid=none,
-			% scale=1.5,
-			% xmode=log,
-			% grid style={line width=.1pt, draw=gray!10},
-			% major grid style={line width=.2pt,draw=gray!50},
+\begin{tikzpicture}
+	\begin{axis}[
+			xmin = -0.5,
+			ymin = -1.5,
+			ymax = 10.2,
+			grid = none,
 			axis lines=none,
-			% minor tick num=5,
-			% xmin=1000, 
-			% xmax=11,
-			% ymin=0,
-			% ymax=5,
-			% xlabel={Время $t$, с},
-			% ylabel={$z$, Ом},
-			% tick style={very thick},
-		    % scale=0.5,
-		    % grid=both,
-		    % grid style={line width=1pt, draw=black!20},
-		    % major grid style={line width=.5pt,draw=black!90},
-		    % minor y tick num=4,
-		    % minor x tick num=4,   
-		     % xmode=log,
-		    % xmode=log,ymode=normal,
-		    % xtick distance=1,
-		    % ytick distance=0.098171875,
-		    % ymax = 1.8,
-		    % xmin = 0,
-		    % ymin = 0,
-			% yticklabel={
-			% \pgfmathparse{\tick/0.098171875/32}
-			% \pgfmathifisint{\pgfmathresult}{$\pgfmathprintnumber[int detect]{\pgfmathresult}{}$}%
-			% {%
-	  %          {$\pgfmathprintnumber[frac, frac denom=32,frac whole=false]{\pgfmathresult}\pi$}
-			% }{}
-			% },	
-			% yticklabel={0}			
-			% ytick={1.5707,0.7853,1,2}, 
-			yticklabels={},%
-			% $\frac{\pi}{4}$
-			% 1},			
-		    xmin = -0.3,
-		    ymin = -1,
-		    ymax = 10.2,
-		    % ticklabel style={font=\tiny,fill=white},    
-		    % axis lines=middle, 	
-		    % xlabel style={right, xshift=1em},
-		    % ylabel style={above},	
-		    % x label style={at={(axis description cs:0.5,-0.08)},anchor=north},
-		    % y label style={at={(axis description cs:-0.08,.5)},rotate=90,anchor=south}	,
-		     % y dir=reverse
-		     % restrict y to domain=0:2,    		
-		     % restrict x to domain=0:3000,    		
-			% legend style={
-			% at={(rel axis cs:0,1)},
-			% anchor=north west,draw=none,inner sep=0pt,fill=gray!10}
-			lin/.style={
-				line width=0.7pt, mark=none,smooth,black
-			},
-			fst/.style={
-				black		 
-			},			
+			width=10cm,
 		]
-	     % \xdef\C{5e-8}
-		\addplot +[lin,color0,opacity=0.4,fst] plot [error bars/.cd, y dir = both, y explicit] table [x expr=\thisrow{x}*0.8, y expr=\thisrow{y}*10] {../data/img_1d_1.tsv} 
-			node[left,pos=0,black,opacity=1] {$0$ мА};
-		\addplot +[lin,color1,opacity=0.5,fst] plot [error bars/.cd, y dir = both, y explicit] table [x expr=\thisrow{x}*0.8, y expr=\thisrow{y}*10]{../data/img_1d_2.tsv}
-			node[left,pos=0,black,opacity=1] {$-0.23$ мА};
-		\addplot +[lin,color2,opacity=0.7,fst] plot [error bars/.cd, y dir = both, y explicit] table [x expr=\thisrow{x}*0.8, y expr=\thisrow{y}*10] {../data/img_1d_3.tsv}
-			node[left,pos=0,black,opacity=1] {$-0.34$ мА};
-		% \addplot +[lin] plot [error bars/.cd, y dir = both, y explicit] table {../data/line4.tsv};
-		\addplot +[lin,color3,opacity=1,fst] plot [error bars/.cd, y dir = both, y explicit] table [x expr=\thisrow{x}*0.8, y expr=\thisrow{y}*10] {../data/img_1d_4.tsv}
-			node[left,pos=0,black,opacity=1] {$-0.54$ мА};
+		\pgfplotstableset{x expr=\thisrow{x}*0.8, y expr=\thisrow{y}*10}
+		\tikzset{
+			mynode/.style={
+					left,pos=0,black,opacity=1
+				}
+		}
 
+		\addplot
+		plot [violet,opacity=0.4,line]
+		table [x=x,y=y] {../data/img_1d_1.tsv}
+		node[mynode] {$0$ мА}
+		;
+		\addplot
+		plot [violet,opacity=0.5,line]
+		table [x=x,y=y] {../data/img_1d_2.tsv}
+		node[mynode] {$-0.23$ мА}
+		;
+		\addplot
+		plot [violet,opacity=0.7,line]
+		table [x=x,y=y] {../data/img_1d_3.tsv}
+		node[mynode] {$-0.34$ мА}
+		;
+		\addplot
+		plot [violet,opacity=1,line]
+		table [x=x,y=y] {../data/img_1d_4.tsv}
+		node[mynode] {$-0.54$ мА}
+		;
 
+		% \draw [thick] 
+		%       (axis cs:0.7,0) coordinate (a) -- (axis cs: 0.8,0) coordinate (b)
+		%       node[pos=0.5, below,yshift=-0.25em] {$100$ мс};
 
-		\draw [thick] 
-        (axis cs:0.7,0) coordinate (a) -- (axis cs: 0.8,0) coordinate (b)
-        node[pos=0.5, below,yshift=-0.25em] {$100$ мс};
-
-		\draw [] (axis cs:0.7,-0.1) -- (axis cs: 0.7,0.1);
-		\draw [] (axis cs:0.8,-0.1) -- (axis cs: 0.8,0.1);
-
-	        % \addplot +[mark=*, mark size=1.2pt, mark color=red, only marks] plot [error bars/.cd, y dir = both, y explicit] table [x=i, y=d] {../../data/11.tsv};
-	        % \addlegendentry{$U_c=-7$ В}
-
-
-	     % \addplot [samples=100, domain=0:10, blue] {-0.006137*x+0.0005967};
-
-	     % \addplot [samples=100, domain=70:100000, red] {sqrt(\R^2+(x*\L)^2)};
-
-	     % \addplot [samples=100, domain=0:10, red] {-x*0.01/1.77};
-	     % \addplot [samples=100, domain=0:10, red] {-x*0.01/1.77};
-	     % \addplot [samples=100, domain=0:10, brown] {-x*0.01/1.33};
-	     % \addplot [samples=100, domain=0:10, black] {-x*0.01/1.14};
-	        % \addplot [samples=100, domain=106.5:240] {(x-106.5)/12.43};
-	        % \addplot [samples=100, line width=1pt, dashed, domain=0:10] {(x-0.15)*2.37/10};
-	        % \addlegendentry{Аппроксимация}
-
-	        % \addplot [samples=100, domain=0:52, dashdotdotted] {0.05215*e^(-(x-27)^2/2/(7.649)^2)};
-	        % \addlegendentry{$\sigma_k=7.649$}
-
-% 	        >
-% 	        General model:
-%      f(x) = (x-x0)/r0
-% Coefficients (with 95% confidence bounds):
-%        r0 =       12.38  (12.29, 12.47)
-%        x0 =       109.2  (108.7, 109.7)
-
-% Goodness of fit:
-%   SSE: 0.3017
-%   R-square: 0.9993
-%   Adjusted R-square: 0.9993
-%   RMSE: 0.07768
-
-		    \end{axis}
-		\end{tikzpicture}	
+		% \draw [] (axis cs:0.7,-0.1) -- (axis cs: 0.7,0.1);
+		% \draw [] (axis cs:0.8,-0.1) -- (axis cs: 0.8,0.1);
+	\end{axis}
+\end{tikzpicture}
 \end{document}

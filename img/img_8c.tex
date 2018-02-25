@@ -2,7 +2,7 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{axis}[
-		scale=1.2,
+		% scale=1.2,
 		axis lines=middle,
 		xlabel={$u_\text{б}$},
 		ylabel={$n\cdot i_k-i_\text{б}$,  $i'_k$},
@@ -13,8 +13,8 @@
 		ymax = 2,
 	]
 
-	\addplot+[lin,yshift=-1pt] plot table[x=x,y=y] {../data/img_8c.tsv};
-	\addplot+[samples=200, lin,domain=0:2.5,] {0.9334*(x-0.5)} node[pos=1, right] {$i'_k$};
+	\addplot+[yshift=-1pt,violet] plot table[x=x,y=y] {../data/img_8c.tsv};
+	\addplot+[samples=200, domain=0:2.5,violet] {0.9334*(x-0.5)} node[pos=1, right] {$i'_k$};
 
 \end{axis}
 \end{tikzpicture}

@@ -1,78 +1,73 @@
-\documentclass[tikz]{standalone}
-\usepackage{cmap}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8x]{inputenc}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable,xcolor}
-\definecolor{color0}{HTML}{e2431e}
-\definecolor{color1}{HTML}{e7711b}
-\definecolor{color2}{HTML}{f1ca3a}
-\definecolor{color3}{HTML}{6f9654}
-\definecolor{color4}{HTML}{1c91c0}
-\definecolor{color5}{HTML}{43459d}
+\input{img.tex}
 \begin{document}
-	\begin{tikzpicture}
-		    \begin{axis}[
-			% grid=both,
-			% scale=1.5,
-			% xmode=log,
-			% grid style={line width=.1pt, draw=gray!10},
-			% major grid style={line width=.2pt,draw=gray!50},
-			% axis lines=middle,
-			% minor tick num=5,
-			% xmin=1000, 
+\begin{tikzpicture}
+	\begin{axis}[
 			axis lines=none,
-			xmin=-0.2,
-			ymin=-0.2,
-			xmax=1.17,
-			% xlabel={$\omega$, рад/с},
-			% ylabel={$z$, Ом},
-			lin/.style={
-				line width=0.7pt, solid, mark=none,smooth,black
-			},			
+			xmin=-0.5,
+			ymin=-0.5,
+			xmax=1.5,
+			scale=1.3
 		]
 
-		
+		\tikzset{
+			mynode/.style={
+					left,pos=0,yshift=0.4em, xshift=-1em,black,opacity=1
+				}
+		}
 
-		% \addplot +[lin,black,opacity=1] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y1] {../data/img2.tsv}
-		\addplot +[lin,black,opacity=0.8, color0,smooth] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_A1.tsv}
-			node[left,pos=0,yshift=0.4em, xshift=-1em,black,opacity=1] {а)};
-		% ;
+		\addplot
+		plot [ochre,line]
+		table [x=x,y=y] {../data/img_1a_A1.tsv}
+		node[mynode] {а)}
+		;
 
-		% \addplot +[lin,black,opacity=1] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y2] {../data/img2.tsv};
-		\addplot +[lin,black,opacity=1,smooth,color5] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_A2.tsv};
+		\addplot
+		plot [violet,line]
+		table [x=x,y=y] {../data/img_1a_A2.tsv}
+		;
 
-		\addplot +[lin,black,opacity=0.8,color0] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_B1.tsv}
-			node[left,pos=0,yshift=0.4em, xshift=-1em,black,opacity=1] {б)};
-		\addplot +[lin,black,opacity=0.8,color5] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_B2.tsv}
-			;
-		\addplot +[lin,black,opacity=0.6,color0] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_C1.tsv}
-			node[left,pos=0,yshift=0.4em, xshift=-1em,black,opacity=1] {в)};
-		\addplot +[lin,black,opacity=0.6,color5] plot [error bars/.cd, y dir = both, y explicit] table [x=x,y=y] {../data/img_1a_C2.tsv}
-			;
-		\begin{scope}[yshift=-1em]
-			
-		\draw [thick] 
-        (axis cs:0.8,0) coordinate (a) -- (axis cs: 0.9,0) coordinate (b)
-        node[pos=0.5, below,yshift=-0.25em] {$0.5$ мс};
+		\addplot
+		plot [ochre,opacity=0.8,line]
+		table [x=x,y=y] {../data/img_1a_B1.tsv}
+		node[mynode] {б)}
+		;
 
-		\draw [] (axis cs:0.9,-0.01) -- (axis cs: 0.9,0.01);
-		\draw [] (axis cs:0.8,-0.01) -- (axis cs: 0.8,0.01);			
-		\end{scope}
+		\addplot
+		plot [violet,opacity=0.8,line]
+		table [x=x,y=y] {../data/img_1a_B2.tsv}
+		;
 
-		\begin{scope}[]
-			
-		\draw [thick] 
-        (axis cs:0.9,0.2) coordinate (a) -- (axis cs: 0.9,0.3) coordinate (b)
-        node[pos=0.5, right,xshift=0.25em] {$10$ мВ};
+		\addplot 
+		plot [ochre,opacity=0.6,line] 
+		table [x=x,y=y] {../data/img_1a_C1.tsv}
+		node[mynode] {в)}
+		;
 
-		\draw [] (axis cs:0.9-0.01,0.2) -- (axis cs: 0.9+0.01,0.2);
-		\draw [] (axis cs:0.9-0.01,0.3) -- (axis cs: 0.9+0.01,0.3);
-		% \draw [] (axis cs:0.8,-0.01) -- (axis cs: 0.8,0.01);			
-		\end{scope}		
-		% \addplot +[line width=0.8pt, mark=none,smooth] plot [error bars/.cd, y dir = both, y explicit] table {../data/line2a.tsv};
+		\addplot 
+		plot [violet,opacity=0.6,line] 
+		table [x=x,y=y] {../data/img_1a_C2.tsv}
+		;
 
 
-		    \end{axis}
-		\end{tikzpicture}	
+		% \begin{scope}[yshift=-1em]
+		% 	\draw [thick]
+		% 	(axis cs:0.8,0) coordinate (a) -- (axis cs: 0.9,0) coordinate (b)
+		% 	node[pos=0.5, below,yshift=-0.25em] {$0.5$ мс};
+
+		% 	\draw [] (axis cs:0.9,-0.01) -- (axis cs: 0.9,0.01);
+		% 	\draw [] (axis cs:0.8,-0.01) -- (axis cs: 0.8,0.01);
+		% \end{scope}
+
+		% \begin{scope}[]
+		% 	\draw [thick]
+		% 	(axis cs:0.9,0.2) coordinate (a) -- (axis cs: 0.9,0.3) coordinate (b)
+		% 	node[pos=0.5, right,xshift=0.25em] {$10$ мВ};
+
+		% 	\draw [] (axis cs:0.9-0.01,0.2) -- (axis cs: 0.9+0.01,0.2);
+		% 	\draw [] (axis cs:0.9-0.01,0.3) -- (axis cs: 0.9+0.01,0.3);
+		% \end{scope}
+
+
+	\end{axis}
+\end{tikzpicture}
 \end{document}

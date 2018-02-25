@@ -1,15 +1,11 @@
-function vdp
+function [x,y] = vdp_berstreeally()
 t=[0 50];
 y0=[-0.2553    0.0656    0.0743    0.0301];
 y0=[-0.3605    0.4672   -0.3217    0.6580];
  
 [T,Y]=ode15s(@myfun, t, y0);
-%plot(T,Y(:,1),'-',T,Y(:,2),'x')
 plot(T,Y(:,1));
-ylim([-1 1.5]);
-%xlim([0 t(2)]);
-%hold on;
-%plot(Y(:,4),Y(:,1));
+
 
 function dy = myfun(t,A)
 a=0.1;
@@ -21,7 +17,6 @@ alpha=5;
 beta=10;
 I=-0.09;
 d=0.85;
-%d=0;
 
 dy = zeros(4,1);   
 dy(1) = 1/epsilon1*(A(1)*(1-A(1))*(A(1)-a)-A(2)-d*A(3));

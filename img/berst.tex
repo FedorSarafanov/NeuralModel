@@ -1,0 +1,20 @@
+\input{img.tex}
+\begin{document}
+% \pagecolor{black}
+\begin{tikzpicture}
+	\begin{axis}[
+			% white,
+			% osci,
+			axis background/.style={fill=black},
+            width=15cm,            
+            height=5cm, 
+            % xlabel={Время, с},
+            % ylabel={Напряжение, мВ},
+		]
+		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=0.2pt] table [x=x,y=y, col sep = tab] {../data/berst.tsv};
+		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=-0.2pt] table [x=x,y=y, col sep = tab] {../data/berst.tsv};
+		\addplot[osci,  smooth, line width=0.5pt] table [x=x,y=y, col sep = tab] {../data/berst.tsv};
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}

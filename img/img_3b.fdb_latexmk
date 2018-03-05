@@ -1,7 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1519564967 "img_3a.tex" "img_3a.pdf" "img_3a" 1519745015
-  "../data/img_3a.tsv" 1518891696 5129 37901015d97392a7013db18a158fff97 ""
-  "/dev/null" 1519743726 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1519632366 "img_3b.tex" "img_3b.pdf" "img_3b" 1519632368
+  "/dev/null" 1519629156 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0500.tfm" 1480795210 3252 bc0f8cc163ba94bbce20e59f671a255d ""
+  "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm0700.tfm" 1480795209 3256 b15a2ce2310c0038b96c5235b038f0eb ""
   "/home/lab/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm1000.tfm" 1480795085 3220 0e417eaf233b160335902e97259a6c77 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1510784331 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1510784337 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -14,7 +15,7 @@
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1510784344 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/share/texmf-dist/fonts/tfm/public/esint/esint10.tfm" 1510399331 364 55557743e6c24ee44e49bc5e8dbbe3cd ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1510784334 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
-  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb" 1510784333 138258 6525c253f16cededa14c7fd0da7f67b2 ""
+  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb" 1510784333 154599 ded6d7c21788a8930eadc7fef7518942 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1510784369 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1510784353 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1510784353 7612 729a8cc22a1ee0029997c7f74717ae05 ""
@@ -184,6 +185,7 @@
   "/usr/share/texmf-dist/tex/latex/standalone/standalone.cfg" 1510399340 902 f9a15737aea33182ec1f3542ca20dbfe ""
   "/usr/share/texmf-dist/tex/latex/standalone/standalone.cls" 1510399340 27291 b798d344bcba4430e7f7dc7561c517d5 ""
   "/usr/share/texmf-dist/tex/latex/tools/array.sty" 1510784349 12396 d41f82b039f900e95f351e54ae740f31 ""
+  "/usr/share/texmf-dist/tex/latex/ucs/data/uni-4.def" 1510399338 8709 1d3e18d352cac8dfca3961538455774f ""
   "/usr/share/texmf-dist/tex/latex/ucs/data/uni-global.def" 1510399338 1375 8a855db83af5d6753ccbbd32e6a8a901 ""
   "/usr/share/texmf-dist/tex/latex/ucs/ucs.sty" 1510399338 27982 5723d81d568db410592a59b85fb3eaae ""
   "/usr/share/texmf-dist/tex/latex/ucs/ucsencs.def" 1510399338 22368 c53c9d0d16c65bef2b157515c9d9f658 ""
@@ -194,9 +196,9 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1517311225 2407194 247758735f893dc2d44705acf59a8eba ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1511798989 7736839 543933ccc960ea85f0c1e72592f655ba ""
   "img.tex" 1519561618 1105 b0cff7ef8974cd4ef12135ab87c43178 ""
-  "img_3a.aux" 1519564969 8 a94a2480d3289e625eea47cd1b285758 ""
-  "img_3a.tex" 1519564967 2150 c06b5c8678529540ac688da4b266c5d4 ""
+  "img_3b.aux" 1519632368 8 a94a2480d3289e625eea47cd1b285758 ""
+  "img_3b.tex" 1519544747 1276 f4e509f29439a0d28d37a487e153ab02 ""
   (generated)
-  "img_3a.pdf"
-  "img_3a.log"
-  "img_3a.aux"
+  "img_3b.log"
+  "img_3b.pdf"
+  "img_3b.aux"

@@ -1,0 +1,90 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{cmap,pgfplots,pgfplotstable}
+
+\begin{document}
+
+\pgfplotstableread{ 				% здесь нужно забивать данные
+b0	n
+2	13
+4	9
+7   8
+}\mytable
+
+	\begin{tikzpicture}
+		\begin{axis}[
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%% НАСТРОЙКИ ГРАФИКА %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			height=7.5cm,
+			scale=0.9,
+			grid=both, 				% включаем отображение сетки на графике
+			%
+			ylabel={$n$, спайков}, 			% подпись оси Y
+			xlabel={$\tau$}, 			% подпись оси X
+			%
+			major grid style={
+				line width=0.5pt, 	% толщина основных линий сетки
+				draw=black!50 		% цвет основных линий сетки: 50% черного (80% белого) 
+			},
+			%
+			minor grid style={
+				line width=0.5pt, 	% толщина промежуточных линий сетки
+				draw=black!20		% цвет промежуточных линий сетки
+			},
+			%
+			minor tick num=4,		% количество промежуточных линий между основными
+			%
+ 			ticklabel style={
+ 				scale=0.95			% уменьшим размер подписей меток на осях
+ 			},    
+ 			%
+	    	axis lines=middle, 		% выравнивание оси y:  middle (в нуле)|left|right
+	    	%
+			ymin = 7,				% максимумы и минимумы осей на графике
+			% ymin = 7,	
+			xmax = 8,
+			ymax = 14,
+			xmin=0,
+			%
+			xtick distance=1,		% расстояние между метками по оси X
+			ytick distance=1,		% расстояние между метками по оси Y
+			xticklabels={},
+			extra x ticks={2,4,7},	% дополнительные метки на осях
+			extra x tick labels={	% можно указать специальные подписи к ним
+					{$\tau_0$},{$\tau_1$},{$\tau_2$}
+				}, 					
+			%
+			unit vector ratio = 1 1,% масштаб 1:1 осей X и Y
+			%
+			x label style={
+				at={(axis description cs:1.07,0)},
+				anchor=center,		% расположение метки ровно в точке (1.1,0)
+				rotate=360,			% вообще метку еще можно повернуть)
+				black				% цвет метки
+			},
+    		y label style={
+    			at={(axis description cs:0,1.1)},
+    			anchor=center,		% расположение метки ровно в точке (0,1.1)
+    			black				% цвет метки
+    		},			
+			%							
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		]
+
+		% Добавляем график на рисунок
+		\addplot[
+			blue!80,					% цвет линии графика
+			% smooth,					% включает "сглаживание" линии графика
+			line width=0.8pt, 	    % толщина основных линии графика
+			mark=*,					% точки на графике: none (нету) или * (точка), 
+			mark size=1pt,			% размер точки на графике
+			% mark color=l
+			% only marks, 			% если расскоментить, будет рисоваться только точки без линии графика
+		] table {\mytable};
+        
+        % Легенда для этого
+       % \legend{}
+       		\end{axis}
+	\end{tikzpicture}	
+\end{document}

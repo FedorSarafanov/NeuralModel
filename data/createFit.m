@@ -7,9 +7,9 @@
 % y=fitresult(x);
 %y=fittedmodel4(x);
 
-fid = fopen('/home/lab/neiro/data/berst_matlab.tsv', 'wt+');
-fprintf(fid, 'x\ty\n','');
-for i=1:1:length(X)
-    fprintf(fid, '%g\t%g\n', [X(i) Y(i)]);
+fid = fopen('/home/lab/neiro/data/matlab_r4c.tsv', 'wt+');
+fprintf(fid, 't\tu\tv\tx\ty\n','');
+for i=1:1:length(t)
+    fprintf(fid, '%g\t%g\t%g\t%g\t%g\n', [t(i) u(i) v(i) x(i) y(i)]);
 end
 fclose(fid);

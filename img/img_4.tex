@@ -1,0 +1,38 @@
+\input{img.tex}
+\begin{document}
+% \pagecolor{black}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{every axis title/.append style={at={(-0.16,0.4)},left}}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\begin{tikzpicture}[baseline] 
+\begin{groupplot}[
+		    group style = {
+		     	group size = 2 by 3,
+				horizontal sep=40pt,
+				vertical sep=20pt,
+		    },
+		    ]
+		    \nextgroupplot[title={(a)},width=10cm, height=4.2cm, ymin=-0.5, ymax=1.5,
+    		xmin=0,xmax=400,]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4A.tsv};
+		     \nextgroupplot[width=5cm, height=4.2cm]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4A.tsv};
+
+		    \nextgroupplot[title={(б)},width=10cm, height=4.2cm, ymin=-0.5, ymax=1.5,
+    		xmin=0,xmax=400,]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4B.tsv};
+		     \nextgroupplot[width=5cm, height=4.2cm]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4B.tsv};		    	
+
+		    \nextgroupplot[title={(в)},width=10cm, height=4.2cm, ymin=-0.5, ymax=1.5,
+    		xmin=0,xmax=400,]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4C.tsv};
+		     \nextgroupplot[width=5cm, height=4.2cm]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4C.tsv};		    	
+		   
+		  \end{groupplot}
+\end{tikzpicture}
+
+
+\end{document}

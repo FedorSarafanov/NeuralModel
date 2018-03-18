@@ -1,4 +1,5 @@
 \input{text/preambule.tex}
+\newcommand{\sq}[1]{\tikz{\draw[draw=#1,fill=#1] (0,0) rectangle (0.7em,0.7em);}}
 \begin{document}  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,9 +13,9 @@
 	\normalsize \textbf{Работу выполнили:}\\
 	\large
 	\underline{Платонова М.В.}, %
-	Сарафанов Ф.Г., %
-	Геликонова В.Г. %
-	% {Рогов М.А.,}
+	{Рогов М.А.,}
+	Сарафанов Ф.Г. %
+	% Геликонова В.Г. %
 	\\ 
 	\vspace{0.5cm}
 	\normalsize{\textbf{Научный руководитель:}\\}
@@ -32,7 +33,8 @@
 % \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Цели работы}
+\section{Введение}
+\subsection{Цели работы}
 \begin{frame}[t]
 	\frametitle{Цели работы}
 	% \textbf{Цели}\\
@@ -44,26 +46,29 @@
 			\item Создать компьютерную модель нейрона
 			\item Рассмотреть физическую реализацию модели в виде электронной установки
 			\item Получить экспериментальные данные с установки и сравнить с теоретическими
+			% феноменологическая модель
 		\end{enumerate}
 	\end{spacing}
 	\vfill
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[c]
-	\frametitle{Глоссарий работы}
-	\begin{spacing}{1}
-		\begin{enumerate}
-			\item \textbf{Нейрон} – клетка, главное рассматриваемое свойство которой -- способность к генерации импульса возбуждения
-			\item \textbf{Подпороговые колебания} – колебания квазигармонического типа, спонтанно возникающие в нейроне
-			\item \textbf{Спайк} – единичный импульс, генерируемый нейроном как отклик на внешнее воздействие выше порога возбуждения
-			\item \textbf{Спайк-берст} – режим колебаний, при котором на одном высоком периоде генерируется больше одного спайка  
-		\end{enumerate}
-		\vspace{1em}
-		Способность нейрона к подпороговым колебаниям и генерации импульсов отражена в рассматриваемой модели.
-	\end{spacing}
-\end{frame}
+% \subsection{Глоссарий}
+% \begin{frame}[c]
+% 	\frametitle{Введениe}
+% 	\begin{spacing}{1}
+% 		\begin{enumerate}
+% 			\item \textbf{Нейрон} – клетка, главное рассматриваемое свойство которой -- способность к генерации импульса возбуждения
+% 			\item \textbf{Подпороговые колебания} – колебания квазигармонического типа, спонтанно возникающие в нейроне
+% 			\item \textbf{Спайк} – единичный импульс, генерируемый нейроном как отклик на внешнее воздействие выше порога возбуждения
+% 			\item \textbf{Спайк-берст} – режим колебаний, при котором на одном высоком периоде генерируется больше одного спайка  
+% 		\end{enumerate}
+% 		\vspace{1em}
+% 		Способность нейрона к подпороговым колебаниям и генерации импульсов отражена в рассматриваемой модели.
+% 	\end{spacing}
+% \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Теоретическая часть}
+\subsection{Подпороговые колебания в нейронах}
 \begin{frame}[c]
 	\frametitle{Подпороговые колебания в нейронах}
 	\begin{columns}
@@ -84,10 +89,12 @@
 	\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Генератор Ван-дер-Поля: фазовый портрет}
 \begin{frame}[t]
 	\frametitle{Генератор Ван-дер-Поля: фазовый портрет}
-	\vspace{-1em}
+	\vspace{-1.2em}
 	% \vspace{1em}
+		
 	\begin{columns}
 		\begin{column}{0.49\textwidth}
 			\begin{figure}[h]
@@ -104,13 +111,14 @@
 			\end{figure}
 		\end{column}
 	\end{columns}	
+	\vspace{0.5em}
 	\begin{columns}[c]
-		\begin{column}{0.49\textwidth}
-		\centering
-		В данной системе реализуются подпороговые колебания:
-		% При $\gamma=0$ происходит бифуркация Андронова-Хопфа и рождается предельный цикл
-		\end{column}
-		\begin{column}{0.49\textwidth}
+		% \begin{column}{0.49\textwidth}
+		% \centering
+		% В данной системе реализуются подпороговые колебания:
+		% % При $\gamma=0$ происходит бифуркация Андронова-Хопфа и рождается предельный цикл
+		% \end{column}
+		\begin{column}{0.99\textwidth}
 	\begin{equation*}
 		\left\{
 		\begin{aligned}
@@ -120,19 +128,26 @@
 		\right.
 	\end{equation*}		
 		\end{column}
-	\end{columns}	
+	\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Модель ФитцХью-Нагумо: фазовый портрет}
 \begin{frame}[t]
 	\frametitle{Модель ФитцХью-Нагумо: фазовый портрет}
-	Способность к генерации спайков реализуется с помощью модели ФХН. Это простейшая система, обладающая порогом возбуждения:
-	\vspace{1em}
-	\begin{columns}[c]
+	% Способность к генерации спайков реализуется с помощью модели ФХН. Это простейшая система, обладающая порогом возбуждения:
+	% \vspace{1em}
+	\begin{columns}[c]	
 		\begin{column}{0.59\textwidth}
-			\vspace{-3em}
+			\vspace{-2em}
 			\begin{figure}[h]
 				\centering
 				\hspace{1em}\includegraphics[]{img/img_3a}
+				% \caption{3-уровневая среда}
+			\end{figure}
+			\vspace{-2em}
+			\begin{figure}[h]
+				\centering
+				\hspace{1em}\includegraphics[]{img/img_3b}
 				% \caption{3-уровневая среда}
 			\end{figure}
 		\end{column}
@@ -150,21 +165,115 @@
 			\vspace{1em}
 			$f(u)$ -- кубическая функция\\
 			\vspace{1em}
-			$\varepsilon \ll 1$
+			$\varepsilon \ll 1$ -- малый параметр
 		\end{column}
 	\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Компьютерная модель Некоркина}
 \begin{frame}%[bg]
-	\frametitle{Схема экспериментальной установки}
+	\frametitle{Математическая модель нейрона}
+		\vspace{-2em}
 	\begin{figure}[h]
-		% \hspace{-2em}
-		\includegraphics[]{img/img_6}
+		\hspace{-2em}
+		\includegraphics[]{img/berst_matlab}
 		% \caption{}
 	\end{figure}
+	
+	\begin{columns}[t]
+		\begin{column}{0.60\textwidth}
+			\vspace{-3em}
+			\begin{equation*}
+				\left\{
+				\begin{aligned}
+					\varepsilon_1\diff{u}{t} & =f(u)-v-d\cdot x\\
+					\diff{v}{t} & =\varepsilon_2(u-I)\\
+					\diff{x}{t} & =y\\
+					\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\Omega^2(u,I)\cdot x
+				\end{aligned}
+				\right.
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.2\textwidth}
+			$a=0.1$\\
+			$\varepsilon_1=0.001$\\
+			$\varepsilon_2=1.5$\\
+			$\gamma=0.21$\\
+			$\omega=1$\\
+		\end{column}
+		\begin{column}{0.19\textwidth}
+			$\alpha=5$\\
+			$\beta=10$\\
+			$I=-0.09$\\
+			$d=0.85$\\
+		\end{column}		
+	\end{columns}
 \end{frame}
-\section{Результаты эксперимента}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Характерные режимы модели}
+\begin{frame}%[bg]
+	\frametitle{Характерные режимы модели}
+		% \vspace{-2em}
+	\begin{figure}[h]
+		\hspace{0em}
+		\includegraphics[]{img/img_4}
+		% \caption{}
+	\end{figure}
+	
+	% \begin{columns}[t]
+	% 	\begin{column}{0.60\textwidth}
+	% 		\vspace{-3em}
+	% 		\begin{equation*}
+	% 			\left\{
+	% 			\begin{aligned}
+	% 				\varepsilon_1\diff{u}{t} & =f(u)-v-d\cdot x\\
+	% 				\diff{v}{t} & =\varepsilon_2(u-I)\\
+	% 				\diff{x}{t} & =y\\
+	% 				\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\Omega^2(u,I)\cdot x
+	% 			\end{aligned}
+	% 			\right.
+	% 		\end{equation*}
+	% 	\end{column}
+	% 	\begin{column}{0.2\textwidth}
+	% 		$a=0.1$\\
+	% 		$\varepsilon_1=0.001$\\
+	% 		$\varepsilon_2=1.5$\\
+	% 		$\gamma=0.21$\\
+	% 		$\omega=1$\\
+	% 	\end{column}
+	% 	\begin{column}{0.19\textwidth}
+	% 		$\alpha=5$\\
+	% 		$\beta=10$\\
+	% 		$I=-0.09$\\
+	% 		$d=0.85$\\
+	% 	\end{column}		
+	% \end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Схема экспериментальной установки}
+\begin{frame}[t]%[bg]
+	\frametitle{Схема экспериментальной установки}
+	\vspace{-1em}
+	\begin{figure}[h]
+		% \hspace{-2em}
+		\includegraphics[width=0.86\linewidth]{img/img_6}
+		% \caption{}
+	\end{figure}
+	\vspace{-0.5em}
+	\begin{columns}
+		\begin{column}{0.49\textwidth}%\centering
+			\sq{black!90} -- генератор Ван-дер-Поля\\
+			\sq{red} -- эмиттерный повторитель
+		\end{column}
+		\begin{column}{0.49\textwidth}%\centering
+			\sq{blue} -- эмиттерный повторитель\\
+			\sq{violet} -- блокинг-генератор
+		\end{column}
+	\end{columns}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Результаты эксперимента}
+\subsection{Подпороговые колебания}
 \begin{frame}%[bg]
 	\frametitle{Подпороговые колебания}
 	\begin{figure}[h]
@@ -174,6 +283,7 @@
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Один спайк на несколько периодов}
 \begin{frame}%[bg]
 	\frametitle{Один спайк на несколько периодов}
 	\begin{figure}[h]
@@ -183,6 +293,7 @@
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Один спайк на период}
 \begin{frame}%[bg]
 	\frametitle{Один спайк на период}
 	\begin{figure}[h]
@@ -192,6 +303,7 @@
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Два спайка на периоде}
 \begin{frame}%[bg]
 	\frametitle{Два спайка на периоде}
 	\begin{figure}[h]
@@ -201,6 +313,7 @@
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Спайк-берст}
 \begin{frame}%[bg]
 	\frametitle{Спайк-берст}
 	\begin{figure}[h]
@@ -215,61 +328,45 @@
 		\hspace{-2em}
 		\centering
 		\includegraphics[]{img/berst_matlab}
-		\vspace{-1.5em}
+		% \vspace{-1.5em}
 		\caption{Компьютерная модель}
 	\end{figure}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Компьютерная модель}
-% \begin{frame}%[bg]
-% 	\frametitle{Результаты компьютерного моделирования}
-% 		\vspace{-2em}
-% 	\begin{figure}[h]
-% 		\hspace{-2em}
-% 		\includegraphics[]{img/berst_matlab}
-% 		% \caption{}
-% 	\end{figure}
-	
-% 	\begin{columns}[t]
-% 		\begin{column}{0.60\textwidth}
-% 			\vspace{-3em}
-% 			\begin{equation*}
-% 				\left\{
-% 				\begin{aligned}
-% 					\varepsilon_1\diff{u}{t} & =f(u)-v-d\cdot x\\
-% 					\diff{v}{t} & =\varepsilon_2(u-I)\\
-% 					\diff{x}{t} & =y\\
-% 					\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\Omega^2(u,I)\cdot x
-% 				\end{aligned}
-% 				\right.
-% 			\end{equation*}
-% 		\end{column}
-% 		\begin{column}{0.2\textwidth}
-% 			$a=0.1$\\
-% 			$\varepsilon_1=0.001$\\
-% 			$\varepsilon_2=1.5$\\
-% 			$\gamma=0.21$\\
-% 			$\omega=1$\\
-% 		\end{column}
-% 		\begin{column}{0.19\textwidth}
-% 			$\alpha=5$\\
-% 			$\beta=10$\\
-% 			$I=-0.09$\\
-% 			$d=0.85$\\
-% 		\end{column}		
-% 	\end{columns}
-% \end{frame}
+\subsection{Влияние потенциала запирания $b_0$}
+\begin{frame}%[bg]
+	\frametitle{Влияние потенциала запирания $b_0$}
+	\begin{figure}[h]
+		% \hspace{2em}
+		\includegraphics[]{img/b0}
+		\caption{Зависимость количества спайков $n$ от величины \\потенциала запирания $b_0$ за время 50 мс }
+	\end{figure}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Влияние времени релаксации на частоту спайков}
+\begin{frame}%[bg]
+	\frametitle{Влияние времени релаксации на частоту спайков}
+	\begin{figure}[h]
+		% \hspace{2em}
+		\includegraphics[]{img/ntau2}
+		\caption{Зависимость количества спайков $n$ от времени релаксации $\tau \sim C$ -- емкости конденсатора в цепи блокинг-генератора за время 50 мс }
+	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Заключение}
+\subsection{Выводы}
 \begin{frame}
 	\frametitle{Выводы}
 	\begin{enumerate}
 		\item Осуществлено знакомство с моделью нейрона с подпороговыми колебаниями
-		\item Качественно исследованы простейшие уравнения, соответствующие квазигармоническим колебаниям и порогу возбуждения
+		\item Качественно исследованы уравнения, соответствующие квазигармоническим колебаниям и порогу возбуждения
 		\item Получены подпороговые колебания, спайк и спайк-берст режим на экспериментальной установке
-		\item Реализована компьютерная модель системы, на которой был получен спайк-берст режим, пёоказано качественное соответствие режиму, полученному эксперементально
+		\item Реализована компьютерная модель системы, на которой был получен спайк-берст режим, показано качественное соответствие режиму, полученному эксперементально
 	\end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Спасибо за внимание}
 \begin{frame}[plain]
 	\vspace{4cm}
 	\begin{center}

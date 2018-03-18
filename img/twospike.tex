@@ -1,6 +1,7 @@
 \input{img.tex}
 \begin{document}
 % \pagecolor{black}
+% \definecolor{osci}{HTML}{43459d} % #43459d 5
 \begin{tikzpicture}
     \begin{axis}[
             % white,
@@ -9,7 +10,7 @@
             width=15cm,            
             height=11cm, 
             xlabel={Время, с},
-            ylabel={Напряжение, мВ},
+            ylabel={Напряжение, В},
         ]
         \addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=0.2pt] table [x=x,y=y, col sep = tab] {../data/twospike.tsv};
         \addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=-0.2pt] table [x=x,y=y, col sep = tab] {../data/twospike.tsv};

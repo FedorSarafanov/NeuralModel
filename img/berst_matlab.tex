@@ -11,7 +11,7 @@
             % xlabel={$t$},
             % ylabel={$u$},
 		]
-		\pgfplotstableset{x expr=\thisrow{x}*0.00021, y expr=\thisrow{y}*4}
+		\pgfplotstableset{x expr=\thisrow{x}*0.00021*100, y expr=\thisrow{y}}
 		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=0.2pt] table [x=x,y=y, col sep = tab] {../data/berst_matlab.tsv};
 		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=-0.2pt] table [x=x,y=y, col sep = tab] {../data/berst_matlab.tsv};
 		\addplot[osci,  smooth, line width=0.5pt] table [x=x,y=y, col sep = tab] {../data/berst_matlab.tsv};

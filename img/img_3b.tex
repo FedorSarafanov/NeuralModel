@@ -14,14 +14,23 @@
 			xtick={0},
 			ytick={0},
 			xmin = 0,
-			ymin = -1,
-			ymax = 3.5,
+			ymin = -0.8,
+			ymax = 2.5,
 			xmax = 1.5,
 			extra x ticks={-1.2},
 			extra x tick style={},
 			extra x tick labels={
 					{u=I}
 				},
+			scale=0.7,
+			black!50,
+			x axis line style={ line width=0.5pt,},%yshift=1.2cm,
+			y axis line style={ line width=0.5pt,},%xshift=0.7cm,
+			line width=1.2pt,
+			xlabel style={black, scale=1.2},%yshift=1.2cm,
+			ylabel style={black, scale=1.2},%xshift=0.7cm,
+			width=11cm,
+			height=6cm,
 		]
 
 
@@ -52,7 +61,7 @@
 
 		\draw[black, opacity=0.5,<->,]
 			(axis cs:0.2,-0.25)
-			--node[above, sloped, below, opacity=1, black] {$T_\text{ц}$}
+			--node[above, sloped, below, opacity=1, black] {$T_\text{и}$}
 			(axis cs: 0.33,-0.25);
 
 		\draw[black, opacity=0.5,<->,]

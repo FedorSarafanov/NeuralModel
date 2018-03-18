@@ -1,0 +1,111 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{cmap,pgfplots,pgfplotstable,amssymb,amsfonts,amsmath,amsthm}
+\pgfplotsset{compat=newest}
+\pgfplotstableread{ 				% здесь нужно забивать данные
+x	y
+2	9
+4	8
+6   13
+}\mytable
+
+\begin{document}
+	\begin{tikzpicture}
+		\begin{axis}[
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%% НАСТРОЙКИ ГРАФИКА %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% height=5cm,				% размер графика. Для презентации оптимальна высота 5см
+			%
+			% scale=1.25,				% масштабирование графика
+			grid=both, 				% включаем отображение сетки на графике
+			%
+			major grid style={
+				line width=0.5pt, 	% толщина основных линий сетки
+				draw=black!50 		% цвет основных линий сетки: 50% черного (80% белого) 
+			},
+			%
+			minor grid style={
+				line width=0.5pt, 	% толщина промежуточных линий сетки
+				draw=black!20		% цвет промежуточных линий сетки
+			},
+			%
+			minor x tick num=4,	% количество промежуточных линий между основными
+			minor y tick num=4,
+			%
+ 			ticklabel style={
+ 				scale=0.95			% уменьшим размер подписей меток на осях
+ 			},    
+ 			%
+			extra x ticks={},	% дополнительные метки на осях
+			extra x tick labels={	% можно указать специальные подписи к ним
+					{:)}
+				}, 				
+			extra tick style={		% свойства дополнительных меток
+				% major grid style=red,% линия через метку - красная
+        		% tick align=outside,	% положение дополнительной метки в стороне от основных
+        		% tick style=red, 	% цвет черточки метки -- красный
+        		% magenta,			% цвет текста метки - розовый
+				% scale=1,
+			},		
+			tick style={		% свойства дополнительных меток
+				scale=0.8,
+			},			
+			%
+	    	axis lines=middle, 		% выравнивание оси y:  middle (в нуле)|left|right
+	    	%
+			xmin = 	0,			% максимумы и минимумы осей на графике
+			ymin =  7,	
+			% xmax =	4,
+			ymax =	14,
+			%
+			xtick distance=1,		% расстояние между метками по оси X
+			ytick distance=1,		% расстояние между метками по оси Y
+			%
+			unit vector ratio = 1 1,% масштаб 3:1 осей X и Y,
+			%
+			extra x ticks={0,2,4,6},		% свои метки по x
+			xtick={0,1,...,10},		% свои метки по x
+			xticklabels={},
+			extra x tick labels={{},{$C_7$},{$C_7+C_8$},{$C_7+C_9$},{}},		
+			%
+			ylabel={$n$}, 			% подпись оси Y
+			xlabel={$C$},			% подпись оси X
+			%
+			% Cвойства меток осей и их положение. В системе координат "axis description cs" 
+			% координаты (0,0) -- левый нижний угол рисунка, (1,1) -- правый верхний
+			x label style={
+				at={(axis description cs:1.06,0)},
+				anchor=center,		% расположение метки ровно в точке (1.1,0)
+				rotate=360,			% вообще метку еще можно повернуть)
+				black				% цвет метки
+			},
+    		y label style={
+    			at={(axis description cs:0,1.1)},
+    			anchor=center,		% расположение метки ровно в точке (0,1.1)
+    			black				% цвет метки
+    		},			
+			%			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		]
+
+		% Добавляем график на рисунок
+		\addplot[
+			blue!80,					% цвет линии графика
+			% smooth,					% включает "сглаживание" линии графика
+			line width=0.8pt, 	    % толщина основных линии графика
+			mark=*,					% точки на графике: none (нету) или * (точка), 
+			mark size=1pt,			% размер точки на графике
+			% only marks, 			% если расскоментить, будет рисоваться только точки без линии графика
+		] table {\mytable};
+        
+        % Легенда для этого
+        % \legend{}	
+
+        % график функции x^2, x от 0 до 2, построить по 100 точкам
+        % \addplot [samples=100, domain=0:2, red] {x^2};
+
+		\end{axis}
+	\end{tikzpicture}	
+\end{document}

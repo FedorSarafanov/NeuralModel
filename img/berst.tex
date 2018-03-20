@@ -7,9 +7,9 @@
 			% osci,
 			axis background/.style={fill=black},
             width=15cm,            
-            height=5cm, 
-            % xlabel={Время, с},
-            % ylabel={Напряжение, мВ},
+            height=11cm, 
+            xlabel={Время, с},
+            ylabel={Напряжение, В},
 		]
 		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=0.2pt] table [x=x,y=y, col sep = tab] {../data/berst.tsv};
 		\addplot[osci, opacity=0.2, smooth, line width=0.5pt, xshift=-0.2pt] table [x=x,y=y, col sep = tab] {../data/berst.tsv};

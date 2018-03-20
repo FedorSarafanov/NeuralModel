@@ -1,7 +1,14 @@
 \input{text/preambule.tex}
 \newcommand{\sq}[1]{\tikz{\draw[draw=#1,fill=#1] (0,0) rectangle (0.7em,0.7em);}}
+\usepackage{xcolor}
+\definecolor{ochre}{HTML}{e2431e} % #e2431e 0
+\definecolor{lightorange}{HTML}{e7711b} % #e7711b 1
+\definecolor{lightyellow}{HTML}{f1ca3a} % #f1ca3a 2
+\definecolor{lightgreen}{HTML}{6f9654} % #6f9654 3
+\definecolor{osci}{HTML}{82FF27}%#82FF27
+\definecolor{sky}{HTML}{1c91c0} % #1c91c0 4
+\definecolor{violet}{HTML}{43459d} % #43459d 5
 \begin{document}  
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[plain]
 	\centering
@@ -41,11 +48,10 @@
 	\vfill
 	\begin{spacing}{1}
 		\begin{enumerate}
-			\item Ознакомиться с моделью нейрона с подпороговыми колебаниями
-			\item Изучить модельные уравнения и эквивалентную схему
-			\item Создать компьютерную модель нейрона
-			\item Рассмотреть физическую реализацию модели в виде электронной установки
-			\item Получить экспериментальные данные с установки и сравнить с теоретическими
+			\item Ознакомиться с моделью нейрона, обладающей свойствами генерировать  подпороговые колебания и импульсы возбуждения
+			\item Феноменологически получить модельные уравнения и качественно исследовать их динамику
+			\item Рассмотреть электронную схему, соответствующую модельным уравнениям
+			\item Осуществить компьютерный и физический эксперименты, сравнить результаты
 			% феноменологическая модель
 		\end{enumerate}
 	\end{spacing}
@@ -76,14 +82,15 @@
 			\begin{figure}[h]
 				\centering
 				\includegraphics[]{img/img_1a}
-				\caption[]{Колебания в нейронах ствола головного мозга}
+				\caption[]{Различные виды колебаний в нейронах ствола головного мозга \cite{linas}}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.49\textwidth}
 			\begin{figure}[h]
 				\centering
+
 				\includegraphics[]{img/img_1d}	
-				\caption[]{Подпороговые колебания в нейронах коры головного мозга}
+				\caption[]{Зависимость динамики колебаний в нейронах коры головного мозга от тока стимуляции\cite{linas}}
 			\end{figure}
 		\end{column}
 	\end{columns}
@@ -173,41 +180,50 @@
 \subsection{Компьютерная модель Некоркина}
 \begin{frame}%[bg]
 	\frametitle{Математическая модель нейрона}
-		\vspace{-2em}
-	\begin{figure}[h]
-		\hspace{-2em}
-		\includegraphics[]{img/berst_matlab}
-		% \caption{}
-	\end{figure}
+
+		% \vspace{-1em}
 	
-	\begin{columns}[t]
+	\begin{columns}[b]
 		\begin{column}{0.60\textwidth}
-			\vspace{-3em}
+			% \vspace{-3em}
 			\begin{equation*}
 				\left\{
 				\begin{aligned}
 					\varepsilon_1\diff{u}{t} & =f(u)-v-d\cdot x\\
 					\diff{v}{t} & =\varepsilon_2(u-I)\\
 					\diff{x}{t} & =y\\
-					\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\Omega^2(u,I)\cdot x
+					\diff{y}{t} & =\mu(\Gamma(u,I)-x^2)y-\omega^2\cdot x
 				\end{aligned}
 				\right.
 			\end{equation*}
 		\end{column}
-		\begin{column}{0.2\textwidth}
-			$a=0.1$\\
-			$\varepsilon_1=0.001$\\
-			$\varepsilon_2=1.5$\\
-			$\gamma=0.21$\\
-			$\omega=1$\\
+		\begin{column}{0.40\textwidth}
+			$f(u)=u(1-u)(u-a)$\\
+			\vspace{0.7em}
+			$\Gamma(u,I)=\gamma(1-\alpha I +\beta u)$\\
+			\vspace{0.7em}
+			\begin{columns}[t]
+			\begin{column}{0.49\textwidth}
+				$a=0.1$\\
+				$\varepsilon_1=0.001$\\
+				$\varepsilon_2=1.5$\\
+				$\gamma=0.21$\\
+				$\omega=1$\\
+			\end{column}
+			\begin{column}{0.49\textwidth}
+				$\alpha=5$\\
+				$\beta=10$\\
+				$I=-0.09$\\
+				$d=0.85$\\
+			\end{column}			
+			\end{columns}
 		\end{column}
-		\begin{column}{0.19\textwidth}
-			$\alpha=5$\\
-			$\beta=10$\\
-			$I=-0.09$\\
-			$d=0.85$\\
-		\end{column}		
 	\end{columns}
+	\begin{figure}[h]
+		% \hspace{-2em}
+		\includegraphics[scale=1]{img/limit}
+		% \caption{}
+	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Характерные режимы модели}
@@ -216,7 +232,7 @@
 		% \vspace{-2em}
 	\begin{figure}[h]
 		\hspace{0em}
-		\includegraphics[]{img/img_4}
+		\includegraphics[scale=1]{img/img_4}
 		% \caption{}
 	\end{figure}
 	
@@ -267,7 +283,7 @@
 		\end{column}
 		\begin{column}{0.49\textwidth}%\centering
 			\sq{blue} -- эмиттерный повторитель\\
-			\sq{violet} -- блокинг-генератор
+			\sq{lightgreen} -- блокинг-генератор
 		\end{column}
 	\end{columns}		
 \end{frame}
@@ -317,20 +333,21 @@
 \begin{frame}%[bg]
 	\frametitle{Спайк-берст}
 	\begin{figure}[h]
-		\hspace{-1.3em}
-		\centering
-		\includegraphics[]{img/berst}
-		\vspace{-1.5em}
-		\caption{Эксперимент}
-	\end{figure}
-	\begin{figure}[h]
-	% \vspace{-1em}
+		% \hspace{-1.3em}
+		% \centering
 		\hspace{-2em}
-		\centering
-		\includegraphics[]{img/berst_matlab}
+		\includegraphics[]{img/berst}
 		% \vspace{-1.5em}
-		\caption{Компьютерная модель}
-	\end{figure}	
+		% \caption{Эксперимент}
+	\end{figure}
+	% \begin{figure}[h]
+	% % \vspace{-1em}
+	% 	% \hspace{-2em}
+	% 	\centering
+	% 	\includegraphics[]{img/berst_matlab}
+	% 	% \vspace{-1.5em}
+	% 	\caption{Компьютерная модель}
+	% \end{figure}	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Влияние потенциала запирания $b_0$}
@@ -339,7 +356,7 @@
 	\begin{figure}[h]
 		% \hspace{2em}
 		\includegraphics[]{img/b0}
-		\caption{Зависимость количества спайков $n$ от величины \\потенциала запирания $b_0$ за время 50 мс }
+		\caption{Зависимость частоты спайков от величины \\потенциала запирания $b_0$ }
 	\end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -349,8 +366,8 @@
 	\begin{figure}[h]
 		% \hspace{2em}
 		\includegraphics[]{img/ntau2}
-		\caption{Зависимость количества спайков $n$ от времени релаксации $\tau \sim C$ -- емкости конденсатора в цепи блокинг-генератора за время 50 мс }
-	\end{figure}
+		\caption{Зависимость частоты спайков от времени релаксации $\tau \sim C$ -- емкости конденсатора в цепи блокинг-генератора}  
+	\end{figure} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -366,6 +383,23 @@
 	\end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+	\frametitle{Список литературы}
+	\setbeamertemplate{bibliography item}[text]
+	\setbeamercolor{bibliography item}{fg=black}
+	\setbeamercolor{bibliography entry title}{fg=black}
+	\setbeamercolor{bibliography entry author}{fg=black}
+	\setbeamercolor{bibliography entry journal}{fg=black}
+	\setbeamercolor{bibliography entry note}{fg=black}
+	\begin{thebibliography}{3}
+	\bibitem{linas}
+		R.Linas ,R.Yarom. Oscillatory properties of guinea-pig inferior olivary neurones and their pharmacological modulation: an \textit{in vitro} study. ---J.Physiol, 1986, т. 376, 163 с.
+	\bibitem{andronov}
+		Андронов А.А., Витт А.А., Хайкин С.Э. Теория колебаний. --- М.:ФизМатИзд, 1959, 916 с.
+	\bibitem{hod}
+		Ходжкин А. Нервный импульс. --- М.:Мир, 1965, 126 с.
+	\end{thebibliography}
+\end{frame}
 \subsection{Спасибо за внимание}
 \begin{frame}[plain]
 	\vspace{4cm}

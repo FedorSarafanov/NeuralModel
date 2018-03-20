@@ -29,7 +29,7 @@ b0	n
 			scale=1.25,
 			grid=both, 				% включаем отображение сетки на графике
 			%
-			ylabel={$n$, спайков}, 			% подпись оси Y
+			ylabel={$\Omega$, спайков/мс}, 			% подпись оси Y
 			xlabel={$b_0$}, 			% подпись оси X
 			%
 			major grid style={
@@ -50,16 +50,17 @@ b0	n
  			%
 	    	axis lines=middle, 		% выравнивание оси y:  middle (в нуле)|left|right
 	    	%
-			ymin = 7,				% максимумы и минимумы осей на графике
+			% ymin = 7,				% максимумы и минимумы осей на графике
 			% ymin = 7,	
-			xmax = 3,
-			ymax = 14,
+			% xmax = 3,
+			ymax = 0.28,
+			ymin = 0.14,
 			xmin=0,
 			%
 			xtick distance=1,		% расстояние между метками по оси X
-			ytick distance=1,		% расстояние между метками по оси Y
+			ytick distance=1/50,		% расстояние между метками по оси Y
 			%
-			unit vector ratio = 1 1,% масштаб 1:1 осей X и Y
+			unit vector ratio = 1 50,% масштаб 1:1 осей X и Y
 			%
 			x label style={
 				at={(axis description cs:1.07,0)},
@@ -75,6 +76,7 @@ b0	n
 			%							
 			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		]
+		\pgfplotstableset{x expr=\thisrow{x}*1, y expr=\thisrow{y}/50}
 
 		% Добавляем график на рисунок
 		\addplot[

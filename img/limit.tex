@@ -1,0 +1,56 @@
+\input{img.tex}
+\begin{document}
+% \pagecolor{black}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{every axis title/.append style={at={(-0.16,0.4)},left}}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\begin{tikzpicture}[baseline] 
+\begin{groupplot}[
+		    group style = {
+		     	group size = 2 by 3,
+				horizontal sep=10pt,
+				vertical sep=10pt,
+		    },
+		    ]
+		    \def\ymin{-0.4}
+		    \def\ymax{1.1}
+		    \def\height{4cm}
+		    % \nextgroupplot[
+		    % % title={(a)},
+		    % width=10cm, height=\height, ymin=\ymin, ymax=0.2,
+    		% xmin=0,xmax=400,xtick=\empty,]
+		    % 	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4A.tsv};
+		    %  \nextgroupplot[width=5cm, height=\height,
+		    %  % xmin=-0.2,xmax=0.3,
+		    %  ymin=\ymin, ymax=0.2,
+		    %  ytick=\empty,xtick=\empty]
+		    % 	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4A.tsv};
+	    	
+
+		    % \nextgroupplot[
+		    % % title={(б)},
+		    % width=10cm, height=\height, ymin=\ymin, ymax=\ymax,
+    		% xmin=0,xmax=400,xtick=\empty,ylabel={$u$},]
+		    % 	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4B.tsv};
+		    %  \nextgroupplot[width=5cm, height=\height,ytick=\empty,xtick=\empty,
+		    %  % xmax=0.3,,xmin=-0.2,
+		    %  ymin=\ymin, ymax=\ymax,
+		    %  ]
+		    % 	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4B.tsv};	
+	    	
+
+		    \nextgroupplot[
+		    % title={(в)},
+		    width=10cm, height=\height, ymin=\ymin, ymax=\ymax,
+    		xmin=0,xmax=400,xlabel={$t$},ylabel={$u$},]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=t,y=u, col sep = tab] {../data/matlab_r4C.tsv};
+		     \nextgroupplot[width=5cm, height=\height,xlabel={$y$},ytick=\empty,xtick={-0.1,0,0.1,0.2,0.3},xmin=-0.2,xmax=0.3,ymin=\ymin, ymax=\ymax,]
+		    	\addplot[violet, smooth, line width=0.5pt] table [x=y,y=u, col sep = tab] {../data/matlab_r4C.tsv};		
+		
+		   
+		  \end{groupplot}
+\end{tikzpicture}
+
+
+\end{document}

@@ -1,7 +1,14 @@
 \documentclass[border=0pt]{standalone}
 \usepackage[europeanresistors,americaninductors]{circuitikz}
 
-
+\usepackage{xcolor}
+\definecolor{ochre}{HTML}{e2431e} % #e2431e 0
+\definecolor{lightorange}{HTML}{e7711b} % #e7711b 1
+\definecolor{lightyellow}{HTML}{f1ca3a} % #f1ca3a 2
+\definecolor{lightgreen}{HTML}{6f9654} % #6f9654 3
+\definecolor{osci}{HTML}{82FF27}%#82FF27
+\definecolor{sky}{HTML}{1c91c0} % #1c91c0 4
+\definecolor{violet}{HTML}{43459d} % #43459d 5
 \begin{document}
 \tikzset{Rs/.style={}}
 \ctikzset{bipoles/length=0.8cm}
@@ -65,8 +72,8 @@
 		\draw (5,7) to[short,*-]  (T3.C);
 		\draw (3,0) to[short,*-*]  (5,0);
 	\end{scope}
-	\begin{scope}[color=violet]
-		\draw (6.5,0) to[R,Rs,*-,l_=$R_4$] ++(0,1.5);
+	\begin{scope}[color=lightgreen]
+		\draw (6.5,0) to[R,Rs,*-,l_=$R_8$] ++(0,1.5);
 		\draw (7.5,0) to[C,*-,] node[right, yshift=-0.5cm] {$C_6$} ++(0,1.5);
 		\draw (6.5,1.5) -- ++(0.5,0) to[short,*-] ++(0.5,0);
 
